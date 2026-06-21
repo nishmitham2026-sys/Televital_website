@@ -22,12 +22,12 @@ export default function Footer() {
   };
 
   const newsItems = [
-    { id: 0, thumb: '/images/footergallery/televital-footer1.jpg', full: '/images/footergallery/televital-footer1.jpg', title: 'Telemedicine News 1' },
-    { id: 1, thumb: '/images/footergallery/televital-footer2.jpg', full: '/images/footergallery/televital-footer2.jpg', title: 'Telemedicine News 2' },
-    { id: 2, thumb: '/images/footergallery/Decu1.jpg', full: '/images/footergallery/Decu1.jpg', title: 'Defence Telemedicine' },
-    { id: 3, thumb: '/images/footergallery/televital-footer4.jpg', full: '/images/footergallery/televital-footer4.jpg', title: 'Rural Telemedicine' },
-    { id: 4, thumb: '/images/footergallery/televital-footer5.jpg', full: '/images/footergallery/televital-footer5.jpg', title: 'Ex-President Pranab Mukherjee' },
-    { id: 5, thumb: '/images/footergallery/televital-footer6.jpg', full: '/images/footergallery/televital-footer6.jpg', title: 'Seychelles Victoria Hospital' }
+    { id: 0, thumb: window.getAssetPath('images/footergallery/televital-footer1.jpg'), full: window.getAssetPath('images/footergallery/televital-footer1.jpg'), title: 'Telemedicine News 1' },
+    { id: 1, thumb: window.getAssetPath('images/footergallery/televital-footer2.jpg'), full: window.getAssetPath('images/footergallery/televital-footer2.jpg'), title: 'Telemedicine News 2' },
+    { id: 2, thumb: window.getAssetPath('images/footergallery/Decu1.jpg'), full: window.getAssetPath('images/footergallery/Decu1.jpg'), title: 'Defence Telemedicine' },
+    { id: 3, thumb: window.getAssetPath('images/footergallery/televital-footer4.jpg'), full: window.getAssetPath('images/footergallery/televital-footer4.jpg'), title: 'Rural Telemedicine' },
+    { id: 4, thumb: window.getAssetPath('images/footergallery/televital-footer5.jpg'), full: window.getAssetPath('images/footergallery/televital-footer5.jpg'), title: 'Ex-President Pranab Mukherjee' },
+    { id: 5, thumb: window.getAssetPath('images/footergallery/televital-footer6.jpg'), full: window.getAssetPath('images/footergallery/televital-footer6.jpg'), title: 'Seychelles Victoria Hospital' }
   ];
 
   return (

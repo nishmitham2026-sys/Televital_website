@@ -135,7 +135,7 @@ export default function CaseStudies() {
               </p>
               <button 
                 class="btn btn-primary-custom rounded-pill mt-auto font-sans font-sm"
-                onClick={() => setActiveUPImage({ src: '/images/footergallery/UP1.jpg', title: 'Uttar Pradesh Telemedicine Initiative' })}
+                onClick={() => setActiveUPImage({ src: window.getAssetPath('images/footergallery/UP1.jpg'), title: 'Uttar Pradesh Telemedicine Initiative' })}
                 style={{ width: 'fit-content' }}
               >
                 View News Clipping <i class="bi bi-eye ms-1"></i>
@@ -190,12 +190,12 @@ export default function CaseStudies() {
               </a>
             </li>
             <li>
-              <a href="/downloads/NASAReport.pdf" target="_blank" class="text-secondary hover-teal">
+              <a href={window.getAssetPath('downloads/NASAReport.pdf')} target="_blank" class="text-secondary hover-teal">
                 <i class="bi bi-file-earmark-pdf text-danger me-1"></i> TeleVital in NASA's Annual Report (PDF)
               </a>
             </li>
             <li>
-              <a href="/downloads/Pilot_Proj.pdf" target="_blank" class="text-secondary hover-teal">
+              <a href={window.getAssetPath('downloads/Pilot_Proj.pdf')} target="_blank" class="text-secondary hover-teal">
                 <i class="bi bi-file-earmark-pdf text-danger me-1"></i> MedITAC Pilot Project Report (PDF)
               </a>
             </li>
@@ -322,7 +322,7 @@ export default function CaseStudies() {
             This satellite-based health network links specialty super-hospitals in urban centers to remote clinics in the Andaman & Nicobar Islands, hilly terrains of Jammu & Kashmir, and rural villages, saving lives through instant expert consultations.
           </p>
           <div class="mt-4 pt-3 border-top text-start">
-            <a href="/downloads/ISRO-Telemedicine-Initiative.pdf" target="_blank" class="btn btn-outline-danger btn-sm rounded-pill">
+            <a href={window.getAssetPath('downloads/ISRO-Telemedicine-Initiative.pdf')} target="_blank" class="btn btn-outline-danger btn-sm rounded-pill">
               <i class="bi bi-file-earmark-pdf me-1"></i> Read ISRO Telemedicine Initiative (PDF)
             </a>
           </div>
@@ -356,7 +356,7 @@ export default function CaseStudies() {
       <div class="row g-4 mt-4 pt-4 border-top">
         <div class="col-md-6">
           <h5 class="fw-bold text-primary font-heading">Initiative Documents</h5>
-          <a href="/downloads/Pilot_Proj.pdf" target="_blank" class="small text-secondary hover-teal d-flex align-items-center gap-1">
+          <a href={window.getAssetPath('downloads/Pilot_Proj.pdf')} target="_blank" class="small text-secondary hover-teal d-flex align-items-center gap-1">
             <i class="bi bi-file-earmark-pdf text-danger"></i> MEA Pilot Project Report (PDF)
           </a>
         </div>

@@ -128,7 +128,7 @@ export default function Telemedicine() {
                   In India, TeleVital is the preferred Telemedicine solution provider to the Indian Space Research Organisation (ISRO) sponsored projects, implementing over 327 turn-key projects across the subcontinent.
                 </p>
                 <div class="d-flex flex-column gap-2 mt-3 pt-2 border-top">
-                  <a href="/downloads/ISRO-Telemedicine-Initiative.pdf" target="_blank" class="small text-secondary hover-teal">
+                  <a href={window.getAssetPath('downloads/ISRO-Telemedicine-Initiative.pdf')} target="_blank" class="small text-secondary hover-teal">
                     <i class="bi bi-file-earmark-pdf me-1 text-danger"></i> ISRO Telemedicine Initiative PDF
                   </a>
                   <Link to="/case-studies/isro-telemedicine-network" class="small text-primary hover-teal fw-medium mt-auto">

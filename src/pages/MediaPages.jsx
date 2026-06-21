@@ -44,35 +44,35 @@ export default function MediaPages() {
   ];
 
   const newsItems = [
-    { id: 0, src: '/images/Eenadu-paper-2015.jpg', type: 'local', title: 'NTR School E-Learning launch clipping in Eenadu' },
-    { id: 1, src: '/images/vartha-march-2015.jpg', type: 'local', title: 'Nara Bhuvaneshwari launches NTR E-Learning clipping' },
-    { id: 2, src: '/images/in-news/nigeria-luth.jpg', type: 'international', title: 'LUTH test-runs telemedicine equipment (The Nation Nigeria)' },
-    { id: 3, src: '/images/in-news/seychelles.jpg', type: 'international', title: 'Healthcare available at click of button (Seychelles Nation)' },
-    { id: 4, src: '/images/in-news/news-2008-1.png', type: 'international', title: 'Victoria Hospital now linked to specialists abroad (Seychelles Nation)' },
-    { id: 5, src: '/images/in-news/news-2008.png', type: 'international', title: 'Victoria Hospital telemedicine link launch clipping' }
+    { id: 0, src: window.getAssetPath('images/Eenadu-paper-2015.jpg'), type: 'local', title: 'NTR School E-Learning launch clipping in Eenadu' },
+    { id: 1, src: window.getAssetPath('images/vartha-march-2015.jpg'), type: 'local', title: 'Nara Bhuvaneshwari launches NTR E-Learning clipping' },
+    { id: 2, src: window.getAssetPath('images/in-news/nigeria-luth.jpg'), type: 'international', title: 'LUTH test-runs telemedicine equipment (The Nation Nigeria)' },
+    { id: 3, src: window.getAssetPath('images/in-news/seychelles.jpg'), type: 'international', title: 'Healthcare available at click of button (Seychelles Nation)' },
+    { id: 4, src: window.getAssetPath('images/in-news/news-2008-1.png'), type: 'international', title: 'Victoria Hospital now linked to specialists abroad (Seychelles Nation)' },
+    { id: 5, src: window.getAssetPath('images/in-news/news-2008.png'), type: 'international', title: 'Victoria Hospital telemedicine link launch clipping' }
   ];
 
   const galleryItems = [
-    { id: 0, src: '/images/footergallery/televital-footer4.jpg', title: 'Late President Shri A.P.J Abdul Kalam' },
-    { id: 1, src: '/images/footergallery/televital-footer5.jpg', title: 'Ex-President Shri Pranab Mukherjee' },
-    { id: 2, src: '/images/footergallery/Decu1.jpg', title: 'Hon Defence Minister Shri Rajnath Singh' },
-    { id: 3, src: '/images/footergallery/UP1.jpg', title: 'UP CM Shri Yogi Adithyanath' },
-    { id: 4, src: '/images/footergallery/Decu2.jpeg', title: 'Army Telemedicine Demonstration' },
-    { id: 5, src: '/images/footergallery/UP2.jpg', title: 'UP Telemedicine Inauguration' },
-    { id: 6, src: '/images/footergallery/Toli.jpeg', title: 'E-Learning Class Session' },
-    { id: 7, src: '/images/footergallery/televital-footer7.jpg', title: 'Clinical Training Lecture' },
-    { id: 8, src: '/images/footergallery/Bhutan.JPG', title: 'Bhutan Telemedicine Commissioning' },
-    { id: 9, src: '/images/footergallery/televital-footer1.jpg', title: 'Telemedicine Console Demo' },
-    { id: 10, src: '/images/footergallery/televital-footer6.jpg', title: 'Seychelles Specialist Demonstration' },
-    { id: 11, src: '/images/footergallery/televital-footer2.jpg', title: 'Super-Specialty Hospital Link' },
-    { id: 12, src: '/images/televital-footer1.jpg', title: 'TeleVital Server Control' },
-    { id: 13, src: '/images/televital-footer2.jpg', title: 'Dialysis and Vital Sign Sync' },
-    { id: 14, src: '/images/televital-foooter3.jpg', title: 'Rural Classroom Setups' },
-    { id: 15, src: '/images/televital-footer4.jpg', title: 'Emergency Ambulance ECG link' },
-    { id: 16, src: '/images/televital-footer5.jpg', title: 'ECG Signal Streams' },
-    { id: 17, src: '/images/televital-footer6.jpg', title: 'Super Specialty Doctor Panel' },
-    { id: 18, src: '/images/televital-footer8.jpg', title: 'African Hospital Connection' },
-    { id: 19, src: '/images/televital-footer9.jpg', title: 'Satellite Telehealth Setup' }
+    { id: 0, src: window.getAssetPath('images/footergallery/televital-footer4.jpg'), title: 'Late President Shri A.P.J Abdul Kalam' },
+    { id: 1, src: window.getAssetPath('images/footergallery/televital-footer5.jpg'), title: 'Ex-President Shri Pranab Mukherjee' },
+    { id: 2, src: window.getAssetPath('images/footergallery/Decu1.jpg'), title: 'Hon Defence Minister Shri Rajnath Singh' },
+    { id: 3, src: window.getAssetPath('images/footergallery/UP1.jpg'), title: 'UP CM Shri Yogi Adithyanath' },
+    { id: 4, src: window.getAssetPath('images/footergallery/Decu2.jpeg'), title: 'Army Telemedicine Demonstration' },
+    { id: 5, src: window.getAssetPath('images/footergallery/UP2.jpg'), title: 'UP Telemedicine Inauguration' },
+    { id: 6, src: window.getAssetPath('images/footergallery/Toli.jpeg'), title: 'E-Learning Class Session' },
+    { id: 7, src: window.getAssetPath('images/footergallery/televital-footer7.jpg'), title: 'Clinical Training Lecture' },
+    { id: 8, src: window.getAssetPath('images/footergallery/Bhutan.JPG'), title: 'Bhutan Telemedicine Commissioning' },
+    { id: 9, src: window.getAssetPath('images/footergallery/televital-footer1.jpg'), title: 'Telemedicine Console Demo' },
+    { id: 10, src: window.getAssetPath('images/footergallery/televital-footer6.jpg'), title: 'Seychelles Specialist Demonstration' },
+    { id: 11, src: window.getAssetPath('images/footergallery/televital-footer2.jpg'), title: 'Super-Specialty Hospital Link' },
+    { id: 12, src: window.getAssetPath('images/televital-footer1.jpg'), title: 'TeleVital Server Control' },
+    { id: 13, src: window.getAssetPath('images/televital-footer2.jpg'), title: 'Dialysis and Vital Sign Sync' },
+    { id: 14, src: window.getAssetPath('images/televital-foooter3.jpg'), title: 'Rural Classroom Setups' },
+    { id: 15, src: window.getAssetPath('images/televital-footer4.jpg'), title: 'Emergency Ambulance ECG link' },
+    { id: 16, src: window.getAssetPath('images/televital-footer5.jpg'), title: 'ECG Signal Streams' },
+    { id: 17, src: window.getAssetPath('images/televital-footer6.jpg'), title: 'Super Specialty Doctor Panel' },
+    { id: 18, src: window.getAssetPath('images/televital-footer8.jpg'), title: 'African Hospital Connection' },
+    { id: 19, src: window.getAssetPath('images/televital-footer9.jpg'), title: 'Satellite Telehealth Setup' }
   ];
 
   // ==========================================

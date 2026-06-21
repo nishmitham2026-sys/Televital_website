@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
   const partners = [
-    { name: 'NASA', logo: '/images/logo/nasa.jpg' },
-    { name: 'ISRO', logo: '/images/logo/isro.jpg' },
-    { name: 'TCIL', logo: '/images/logo/tcil.jpg' },
-    { name: 'KSCST', logo: '/images/kscst.jpg' },
-    { name: 'IISc', logo: '/images/logo/iisc.jpg' },
-    { name: 'Narayana', logo: '/images/logo/narayana.jpg' },
-    { name: 'Manipal', logo: '/images/manipal.jpg' },
-    { name: 'Asian Heart', logo: '/images/logo/asian-heart-institute.jpg' },
-    { name: 'Star Health', logo: '/images/logo/start-health.jpg' },
-    { name: 'Nevada', logo: '/images/logo/nevada.jpg' },
-    { name: 'Intel', logo: '/images/logo/intel.jpg' },
-    { name: 'Indian Railways', logo: '/images/logo/indian-railways.jpg' },
-    { name: 'Indus International', logo: '/images/indus-international-school.jpg' },
-    { name: 'Veterans Affairs', logo: '/images/veterans-affairs.jpg' },
-    { name: 'Arizona Telemedicine', logo: '/images/arizona-telemedicine.jpg' },
-    { name: 'HP', logo: '/images/hp.jpg' }
+    { name: 'NASA', logo: window.getAssetPath('images/logo/nasa.jpg') },
+    { name: 'ISRO', logo: window.getAssetPath('images/logo/isro.jpg') },
+    { name: 'TCIL', logo: window.getAssetPath('images/logo/tcil.jpg') },
+    { name: 'KSCST', logo: window.getAssetPath('images/kscst.jpg') },
+    { name: 'IISc', logo: window.getAssetPath('images/logo/iisc.jpg') },
+    { name: 'Narayana', logo: window.getAssetPath('images/logo/narayana.jpg') },
+    { name: 'Manipal', logo: window.getAssetPath('images/manipal.jpg') },
+    { name: 'Asian Heart', logo: window.getAssetPath('images/logo/asian-heart-institute.jpg') },
+    { name: 'Star Health', logo: window.getAssetPath('images/logo/start-health.jpg') },
+    { name: 'Nevada', logo: window.getAssetPath('images/logo/nevada.jpg') },
+    { name: 'Intel', logo: window.getAssetPath('images/logo/intel.jpg') },
+    { name: 'Indian Railways', logo: window.getAssetPath('images/logo/indian-railways.jpg') },
+    { name: 'Indus International', logo: window.getAssetPath('images/indus-international-school.jpg') },
+    { name: 'Veterans Affairs', logo: window.getAssetPath('images/veterans-affairs.jpg') },
+    { name: 'Arizona Telemedicine', logo: window.getAssetPath('images/arizona-telemedicine.jpg') },
+    { name: 'HP', logo: window.getAssetPath('images/hp.jpg') }
   ];
 
   return (
@@ -44,7 +44,7 @@ export default function Home() {
                   <p class="text-white-50 mb-4 lh-base font-sm">
                     TeleVital's Remote Patient Monitoring (RPM) and Chronic Care Management (CCM) solutions help healthcare providers deliver remote patient care with timely evidence-based interventions and proactive personalized care.
                   </p>
-                  <a href="/images/TeleVital_RPM_CCM_Brochure_Final.pdf" target="_blank" class="btn btn-secondary-custom rounded-pill">
+                  <a href={window.getAssetPath('images/TeleVital_RPM_CCM_Brochure_Final.pdf')} target="_blank" class="btn btn-secondary-custom rounded-pill">
                     <i class="bi bi-file-earmark-pdf me-2"></i>Download Brochure
                   </a>
                 </div>
