@@ -39,7 +39,7 @@ export default function Telemedicine() {
           </div>
           <div class="col-lg-5">
             <div class="rounded-4 overflow-hidden shadow">
-              <img src="/images/televital-telemedicine.jpg" alt="Telemedicine" class="img-fluid w-100 object-fit-cover" style={{ minHeight: '300px' }} />
+              <img src={window.getAssetPath(`images/televital-telemedicine.jpg`)} alt="Telemedicine" class="img-fluid w-100 object-fit-cover" style={{ minHeight: '300px' }} />
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function Telemedicine() {
             <div class="col-lg-4 col-md-6">
               <div class="p-3 border rounded-3 h-100 d-flex flex-column bg-light bg-opacity-50">
                 <div class="d-flex align-items-center mb-3">
-                  <img src="/images/logo/nasa.jpg" alt="NASA" class="img-fluid rounded me-2 shadow-sm" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
+                  <img src={window.getAssetPath(`images/logo/nasa.jpg`)} alt="NASA" class="img-fluid rounded me-2 shadow-sm" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
                   <h5 class="fw-bold text-primary mb-0 font-heading">MedITAC/NASA</h5>
                 </div>
                 <p class="text-muted small flex-grow-1 lh-base">
@@ -121,7 +121,7 @@ export default function Telemedicine() {
             <div class="col-lg-4 col-md-6">
               <div class="p-3 border rounded-3 h-100 d-flex flex-column bg-light bg-opacity-50">
                 <div class="d-flex align-items-center mb-3">
-                  <img src="/images/logo/isro.jpg" alt="ISRO" class="img-fluid rounded me-2 shadow-sm" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
+                  <img src={window.getAssetPath(`images/logo/isro.jpg`)} alt="ISRO" class="img-fluid rounded me-2 shadow-sm" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
                   <h5 class="fw-bold text-primary mb-0 font-heading">ISRO Network</h5>
                 </div>
                 <p class="text-muted small flex-grow-1 lh-base">
@@ -142,7 +142,7 @@ export default function Telemedicine() {
             <div class="col-lg-4 col-md-12">
               <div class="p-3 border rounded-3 h-100 d-flex flex-column bg-light bg-opacity-50">
                 <div class="d-flex align-items-center mb-3">
-                  <img src="/images/logo/tcil.jpg" alt="TCIL" class="img-fluid rounded me-2 shadow-sm" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
+                  <img src={window.getAssetPath(`images/logo/tcil.jpg`)} alt="TCIL" class="img-fluid rounded me-2 shadow-sm" style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
                   <h5 class="fw-bold text-primary mb-0 font-heading">Pan-Africa Initiative</h5>
                 </div>
                 <p class="text-muted small flex-grow-1 lh-base">

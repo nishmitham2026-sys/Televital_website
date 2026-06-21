@@ -51,10 +51,10 @@ export default function ELearning() {
         <div class="col-lg-5">
           <div class="row g-3">
             <div class="col-6">
-              <img src="/images/deployment.jpg" alt="Deployment" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '180px' }} />
+              <img src={window.getAssetPath(`images/deployment.jpg`)} alt="Deployment" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '180px' }} />
             </div>
             <div class="col-6">
-              <img src="/images/deployment1.jpg" alt="Deployment Setup" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '180px' }} />
+              <img src={window.getAssetPath(`images/deployment1.jpg`)} alt="Deployment Setup" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '180px' }} />
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function ELearning() {
           Considering these conditions, our solution offers syllabus-based electronic educational content along with user-friendly ways to access it, with bidirectional features. Based on our decade-long experience in remotest areas, we developed the **"Virtual Classroom"** console to stream content using a local Wi-Fi router from a local server.
         </p>
         <p class="text-muted small lh-lg">
-          The end terminal laptops are hard-disk-less (increasing reliability) and run for 8 hours on a battery charge. Students can stream content recommended by teachers and answer questions that pop up during video playback. 
+          The end terminal laptops are hard-disk-less (increasing reliability) and run for 8 hours on a battery charge. Students can stream content recommended by teachers and answer questions that pop up during video playback.
         </p>
         <p class="text-muted small lh-lg">
           Science teachers explain complex concepts like DNA replication using 3D animations, history teachers show walks through the Harappan Civilization, and geography teachers show block mountains forming, capturing the complete attention of every student.
@@ -218,7 +218,7 @@ export default function ELearning() {
         </div>
         <span class="text-secondary fw-semibold uppercase letter-spacing-1 font-sm d-block mb-1">Higher Academia</span>
         <h2 class="fw-bold text-primary font-heading mb-4">Technical Education System</h2>
-        
+
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <p class="text-muted lh-lg mb-4">

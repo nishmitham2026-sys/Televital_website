@@ -46,10 +46,10 @@ export default function EHealth() {
           <div class="col-lg-6">
             <div class="row g-3">
               <div class="col-6">
-                <img src="/images/homecare.jpg" alt="Home Care 1" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '200px' }} />
+                <img src={window.getAssetPath(`images/homecare.jpg`)} alt="Home Care 1" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '200px' }} />
               </div>
               <div class="col-6">
-                <img src="/images/homecare1.jpg" alt="Home Care 2" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '200px' }} />
+                <img src={window.getAssetPath(`images/homecare1.jpg`)} alt="Home Care 2" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style={{ height: '200px' }} />
               </div>
             </div>
           </div>
@@ -64,19 +64,19 @@ export default function EHealth() {
 
           <div class="d-flex justify-content-center mb-4">
             <div class="nav nav-pills bg-light p-2 rounded-pill shadow-sm" style={{ width: 'fit-content' }}>
-              <button 
+              <button
                 class={`nav-link rounded-pill px-4 fw-medium border-0 ${activeTab === 'patients' ? 'bg-secondary text-white' : 'text-primary'}`}
                 onClick={() => setActiveTab('patients')}
               >
                 <i class="bi bi-person-fill me-2"></i> For Patients
               </button>
-              <button 
+              <button
                 class={`nav-link rounded-pill px-4 fw-medium border-0 ${activeTab === 'doctors' ? 'bg-secondary text-white' : 'text-primary'}`}
                 onClick={() => setActiveTab('doctors')}
               >
                 <i class="bi bi-heart-pulse-fill me-2"></i> For Doctors
               </button>
-              <button 
+              <button
                 class={`nav-link rounded-pill px-4 fw-medium border-0 ${activeTab === 'providers' ? 'bg-secondary text-white' : 'text-primary'}`}
                 onClick={() => setActiveTab('providers')}
               >

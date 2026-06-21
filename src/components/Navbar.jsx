@@ -9,7 +9,7 @@ export default function Navbar() {
   const handleLogin = (e) => {
     e.preventDefault();
     setIsOpen(false);
-    
+
     Swal.fire({
       title: 'Portal Secure Login',
       html: `
@@ -68,18 +68,18 @@ export default function Navbar() {
       <div class="container">
         {/* Brand Logo */}
         <Link class="navbar-brand d-flex align-items-center" to="/" onClick={() => setIsOpen(false)}>
-          <img 
-            src="/images/logo.png" 
-            alt="TeleVital Logo" 
-            style={{ height: '42px', width: 'auto' }} 
-            class="me-2" 
+          <img
+            src={window.getAssetPath(`images/logo.png`)}
+            alt="TeleVital Logo"
+            style={{ height: '42px', width: 'auto' }}
+            class="me-2"
           />
         </Link>
 
         {/* Mobile Toggle */}
-        <button 
-          class="navbar-toggler border-0 shadow-none" 
-          type="button" 
+        <button
+          class="navbar-toggler border-0 shadow-none"
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label="Toggle navigation"
@@ -91,8 +91,8 @@ export default function Navbar() {
         <div class={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-1">
             <li class="nav-item">
-              <Link 
-                class={`nav-link px-3 fw-medium ${isActive('/') ? 'text-secondary active' : 'text-primary'}`} 
+              <Link
+                class={`nav-link px-3 fw-medium ${isActive('/') ? 'text-secondary active' : 'text-primary'}`}
                 to="/"
                 onClick={() => setIsOpen(false)}
               >
@@ -101,8 +101,8 @@ export default function Navbar() {
             </li>
 
             <li class="nav-item">
-              <Link 
-                class={`nav-link px-3 fw-medium ${isActive('/telemedicine') ? 'text-secondary active' : 'text-primary'}`} 
+              <Link
+                class={`nav-link px-3 fw-medium ${isActive('/telemedicine') ? 'text-secondary active' : 'text-primary'}`}
                 to="/telemedicine"
                 onClick={() => setIsOpen(false)}
               >
@@ -111,8 +111,8 @@ export default function Navbar() {
             </li>
 
             <li class="nav-item">
-              <Link 
-                class={`nav-link px-3 fw-medium ${isActive('/home-care') ? 'text-secondary active' : 'text-primary'}`} 
+              <Link
+                class={`nav-link px-3 fw-medium ${isActive('/home-care') ? 'text-secondary active' : 'text-primary'}`}
                 to="/home-care"
                 onClick={() => setIsOpen(false)}
               >
@@ -122,12 +122,12 @@ export default function Navbar() {
 
             {/* eLearning Dropdown */}
             <li class="nav-item dropdown">
-              <a 
-                class={`nav-link dropdown-toggle px-3 fw-medium ${isDropdownActive('/elearning') ? 'text-secondary active' : 'text-primary'}`} 
-                href="#" 
-                id="elearningDropdown" 
-                role="button" 
-                data-bs-toggle="dropdown" 
+              <a
+                class={`nav-link dropdown-toggle px-3 fw-medium ${isDropdownActive('/elearning') ? 'text-secondary active' : 'text-primary'}`}
+                href="#"
+                id="elearningDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 eLearning
@@ -142,12 +142,12 @@ export default function Navbar() {
 
             {/* Case Studies Dropdown */}
             <li class="nav-item dropdown">
-              <a 
-                class={`nav-link dropdown-toggle px-3 fw-medium ${isDropdownActive('/case-studies') ? 'text-secondary active' : 'text-primary'}`} 
-                href="#" 
-                id="caseStudiesDropdown" 
-                role="button" 
-                data-bs-toggle="dropdown" 
+              <a
+                class={`nav-link dropdown-toggle px-3 fw-medium ${isDropdownActive('/case-studies') ? 'text-secondary active' : 'text-primary'}`}
+                href="#"
+                id="caseStudiesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Case Studies
@@ -167,12 +167,12 @@ export default function Navbar() {
 
             {/* Media Dropdown */}
             <li class="nav-item dropdown">
-              <a 
-                class={`nav-link dropdown-toggle px-3 fw-medium ${isDropdownActive('/media') ? 'text-secondary active' : 'text-primary'}`} 
-                href="#" 
-                id="mediaDropdown" 
-                role="button" 
-                data-bs-toggle="dropdown" 
+              <a
+                class={`nav-link dropdown-toggle px-3 fw-medium ${isDropdownActive('/media') ? 'text-secondary active' : 'text-primary'}`}
+                href="#"
+                id="mediaDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Media
@@ -186,8 +186,8 @@ export default function Navbar() {
             </li>
 
             <li class="nav-item">
-              <Link 
-                class={`nav-link px-3 fw-medium ${isActive('/about') ? 'text-secondary active' : 'text-primary'}`} 
+              <Link
+                class={`nav-link px-3 fw-medium ${isActive('/about') ? 'text-secondary active' : 'text-primary'}`}
                 to="/about"
                 onClick={() => setIsOpen(false)}
               >
@@ -196,8 +196,8 @@ export default function Navbar() {
             </li>
 
             <li class="nav-item">
-              <Link 
-                class={`nav-link px-3 fw-medium ${isActive('/contact') ? 'text-secondary active' : 'text-primary'}`} 
+              <Link
+                class={`nav-link px-3 fw-medium ${isActive('/contact') ? 'text-secondary active' : 'text-primary'}`}
                 to="/contact"
                 onClick={() => setIsOpen(false)}
               >
@@ -206,19 +206,19 @@ export default function Navbar() {
             </li>
 
             <li class="nav-item d-none d-lg-block ms-2">
-              <a 
-                class="btn btn-primary-custom rounded-pill" 
-                href="#" 
+              <a
+                class="btn btn-primary-custom rounded-pill"
+                href="#"
                 onClick={handleLogin}
               >
                 Login
               </a>
             </li>
-            
+
             <li class="nav-item d-lg-none mt-2 px-3">
-              <a 
-                class="btn btn-primary-custom rounded-pill w-100" 
-                href="#" 
+              <a
+                class="btn btn-primary-custom rounded-pill w-100"
+                href="#"
                 onClick={handleLogin}
               >
                 Login

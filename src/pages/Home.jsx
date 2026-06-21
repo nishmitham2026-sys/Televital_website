@@ -31,11 +31,11 @@ export default function Home() {
           <button type="button" data-bs-target="#homeHeroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
           <button type="button" data-bs-target="#homeHeroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
         </div>
-        
+
         <div class="carousel-inner">
           {/* Slide 1 */}
           <div class="carousel-item active" style={{ height: '550px' }}>
-            <img src="/images/RPM_2.jpg" class="d-block w-100 h-100 object-fit-cover" alt="RPM and CCM" />
+            <img src={window.getAssetPath(`images/RPM_2.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="RPM and CCM" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
@@ -54,7 +54,7 @@ export default function Home() {
 
           {/* Slide 2 */}
           <div class="carousel-item" style={{ height: '550px' }}>
-            <img src="/images/televital-1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Remote Anesthesia" />
+            <img src={window.getAssetPath(`images/televital-1.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="Remote Anesthesia" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
@@ -73,7 +73,7 @@ export default function Home() {
 
           {/* Slide 3 */}
           <div class="carousel-item" style={{ height: '550px' }}>
-            <img src="/images/tv-slider-2.jpg" class="d-block w-100 h-100 object-fit-cover" alt="ISRO Network" />
+            <img src={window.getAssetPath(`images/tv-slider-2.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="ISRO Network" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
@@ -92,7 +92,7 @@ export default function Home() {
 
           {/* Slide 4 */}
           <div class="carousel-item" style={{ height: '550px' }}>
-            <img src="/images/tv-slider-3.jpg" class="d-block w-100 h-100 object-fit-cover" alt="PAN African Network" />
+            <img src={window.getAssetPath(`images/tv-slider-3.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="PAN African Network" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
               <div class="carousel-caption text-start" style={{ bottom: '15%', left: '12px', right: 'auto' }}>
                 <div class="carousel-overlay-card">
@@ -144,7 +144,7 @@ export default function Home() {
             <div class="col-md-4">
               <div class="premium-card">
                 <div class="mb-4">
-                  <img src="/images/user1-telemedicine.jpg" alt="Telemedicine" class="img-fluid rounded-3 mb-3 shadow-sm w-100" style={{ height: '180px', objectFit: 'cover' }} />
+                  <img src={window.getAssetPath(`images/user1-telemedicine.jpg`)} alt="Telemedicine" class="img-fluid rounded-3 mb-3 shadow-sm w-100" style={{ height: '180px', objectFit: 'cover' }} />
                 </div>
                 <h4 class="fw-bold mb-3 text-primary">Telemedicine</h4>
                 <p class="text-muted small flex-grow-1 lh-base">
@@ -160,7 +160,7 @@ export default function Home() {
             <div class="col-md-4">
               <div class="premium-card">
                 <div class="mb-4">
-                  <img src="/images/user2-ehealth.jpg" alt="eHealth" class="img-fluid rounded-3 mb-3 shadow-sm w-100" style={{ height: '180px', objectFit: 'cover' }} />
+                  <img src={window.getAssetPath(`images/user2-ehealth.jpg`)} alt="eHealth" class="img-fluid rounded-3 mb-3 shadow-sm w-100" style={{ height: '180px', objectFit: 'cover' }} />
                 </div>
                 <h4 class="fw-bold mb-3 text-primary">eHealth</h4>
                 <p class="text-muted small flex-grow-1 lh-base">
@@ -176,7 +176,7 @@ export default function Home() {
             <div class="col-md-4">
               <div class="premium-card">
                 <div class="mb-4">
-                  <img src="/images/user3-elearning.jpg" alt="eLearning" class="img-fluid rounded-3 mb-3 shadow-sm w-100" style={{ height: '180px', objectFit: 'cover' }} />
+                  <img src={window.getAssetPath(`images/user3-elearning.jpg`)} alt="eLearning" class="img-fluid rounded-3 mb-3 shadow-sm w-100" style={{ height: '180px', objectFit: 'cover' }} />
                 </div>
                 <h4 class="fw-bold mb-3 text-primary">eLearning</h4>
                 <p class="text-muted small flex-grow-1 lh-base">
@@ -205,36 +205,36 @@ export default function Home() {
             {/* Gallery Images (6) */}
             <div class="col-sm-6 col-md-4">
               <div class="img-hover-scale" style={{ height: '220px' }}>
-                <img src="/images/footergallery/Decu1.jpg" alt="Gallery 1" title="Hon Defence Minister Shri Rajnath Singh" />
+                <img src={window.getAssetPath(`images/footergallery/Decu1.jpg`)} alt="Gallery 1" title="Hon Defence Minister Shri Rajnath Singh" />
               </div>
             </div>
             <div class="col-sm-6 col-md-4">
               <div class="img-hover-scale" style={{ height: '220px' }}>
-                <img src="/images/footergallery/UP1.jpg" alt="Gallery 2" title="UP CM Shri Yogi Adithyanath" />
+                <img src={window.getAssetPath(`images/footergallery/UP1.jpg`)} alt="Gallery 2" title="UP CM Shri Yogi Adithyanath" />
               </div>
             </div>
             <div class="col-sm-6 col-md-4">
               <div class="img-hover-scale" style={{ height: '220px' }}>
-                <img src="/images/footergallery/Decu2.jpeg" alt="Gallery 3" title="Army Telemedicine" />
+                <img src={window.getAssetPath(`images/footergallery/Decu2.jpeg`)} alt="Gallery 3" title="Army Telemedicine" />
               </div>
             </div>
             <div class="col-sm-6 col-md-4">
               <div class="img-hover-scale" style={{ height: '220px' }}>
-                <img src="/images/footergallery/UP2.jpg" alt="Gallery 4" title="UP Telemedicine Inaguration" />
+                <img src={window.getAssetPath(`images/footergallery/UP2.jpg`)} alt="Gallery 4" title="UP Telemedicine Inaguration" />
               </div>
             </div>
             <div class="col-sm-6 col-md-4">
               <div class="img-hover-scale" style={{ height: '220px' }}>
-                <img src="/images/footergallery/televital-footer4.jpg" alt="Gallery 5" title="Late President Shri A.P.J Abdul Kalam" />
+                <img src={window.getAssetPath(`images/footergallery/televital-footer4.jpg`)} alt="Gallery 5" title="Late President Shri A.P.J Abdul Kalam" />
               </div>
             </div>
             <div class="col-sm-6 col-md-4">
               <div class="img-hover-scale" style={{ height: '220px' }}>
-                <img src="/images/footergallery/televital-footer5.jpg" alt="Gallery 6" title="Ex-President Shri Pranab Mukherjee" />
+                <img src={window.getAssetPath(`images/footergallery/televital-footer5.jpg`)} alt="Gallery 6" title="Ex-President Shri Pranab Mukherjee" />
               </div>
             </div>
           </div>
-          
+
           <div class="text-center mt-4">
             <Link to="/media/image-gallery" class="btn btn-primary-custom rounded-pill">
               View Complete Gallery <i class="bi bi-images ms-2"></i>
