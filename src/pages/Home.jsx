@@ -36,7 +36,7 @@ export default function Home() {
           {/* Slide 1 */}
           <div class="carousel-item active" style={{ height: '550px' }}>
             <img src={window.getAssetPath(`images/RPM_2.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="RPM and CCM" />
-            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
+            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
                   <span class="badge bg-secondary mb-2 px-3 py-2 rounded-pill font-sans uppercase">Services</span>
@@ -55,7 +55,7 @@ export default function Home() {
           {/* Slide 2 */}
           <div class="carousel-item" style={{ height: '550px' }}>
             <img src={window.getAssetPath(`images/televital-1.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="Remote Anesthesia" />
-            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
+            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
                   <span class="badge bg-secondary mb-2 px-3 py-2 rounded-pill font-sans">First in Industry</span>
@@ -74,7 +74,7 @@ export default function Home() {
           {/* Slide 3 */}
           <div class="carousel-item" style={{ height: '550px' }}>
             <img src={window.getAssetPath(`images/tv-slider-2.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="ISRO Network" />
-            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
+            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
                   <span class="badge bg-secondary mb-2 px-3 py-2 rounded-pill font-sans">Scale & Reach</span>
@@ -93,7 +93,7 @@ export default function Home() {
           {/* Slide 4 */}
           <div class="carousel-item" style={{ height: '550px' }}>
             <img src={window.getAssetPath(`images/tv-slider-3.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="PAN African Network" />
-            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x d-none d-md-block">
+            <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', left: '12px', right: 'auto' }}>
                 <div class="carousel-overlay-card">
                   <span class="badge bg-secondary mb-2 px-3 py-2 rounded-pill font-sans">Global Impact</span>
