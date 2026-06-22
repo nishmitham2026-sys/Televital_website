@@ -215,6 +215,26 @@ export default function Navbar() {
               </Link>
             </li>
 
+            <li class="nav-item">
+              <Link
+                class={`nav-link px-3 fw-medium ${isActive('/privacy') ? 'text-secondary active' : 'text-primary'}`}
+                to="/privacy"
+                onClick={() => setIsOpen(false)}
+              >
+                Privacy
+              </Link>
+            </li>
+
+            <li class="nav-item">
+              <Link
+                class={`nav-link px-3 fw-medium ${isActive('/support') ? 'text-secondary active' : 'text-primary'}`}
+                to="/support"
+                onClick={() => setIsOpen(false)}
+              >
+                Support
+              </Link>
+            </li>
+
             <li class="nav-item d-none d-lg-block ms-2">
               <a
                 class="btn btn-primary-custom rounded-pill"
