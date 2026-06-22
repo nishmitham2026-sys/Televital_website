@@ -382,39 +382,54 @@ a {
 /* Mobile Responsive Overrides for Hero Carousel and Caption Cards */
 @media (max-width: 767.98px) {
   .carousel-item {
-    height: 420px !important;
+    height: 380px !important;
   }
   
   .carousel-caption {
     left: 5% !important;
     right: 5% !important;
-    bottom: 6% !important;
+    bottom: 5% !important;
     width: 90% !important;
     padding: 0 !important;
   }
   
   .carousel-overlay-card {
-    padding: 1.25rem !important;
+    padding: 1rem 1.25rem !important;
     max-width: 100% !important;
     border-radius: 16px !important;
     background: rgba(12, 35, 64, 0.9) !important;
   }
   
   .carousel-overlay-card h1 {
-    font-size: 1.3rem !important;
-    margin-bottom: 0.4rem !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 0.3rem !important;
     line-height: 1.3 !important;
   }
   
   .carousel-overlay-card p {
-    font-size: 0.8rem !important;
-    margin-bottom: 0.75rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.6rem !important;
+    line-height: 1.35 !important;
   }
   
   .carousel-overlay-card .btn {
-    padding: 0.4rem 1rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.35rem 0.9rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Focus the primary subject of the landscape images on mobile */
+  .carousel-img-1 {
+    object-position: 25% center !important;
+  }
+  .carousel-img-2 {
+    object-position: 75% center !important;
+  }
+  .carousel-img-3 {
+    object-position: center center !important;
+  }
+  .carousel-img-4 {
+    object-position: 80% center !important;
   }
 }
+
 

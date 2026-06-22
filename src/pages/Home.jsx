@@ -35,7 +35,7 @@ export default function Home() {
         <div class="carousel-inner">
           {/* Slide 1 */}
           <div class="carousel-item active" style={{ height: '550px' }}>
-            <img src={window.getAssetPath(`images/RPM_2.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="RPM and CCM" />
+            <img src={window.getAssetPath(`images/RPM_2.jpg`)} class="d-block w-100 h-100 object-fit-cover carousel-img-1" alt="RPM and CCM" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
@@ -54,7 +54,7 @@ export default function Home() {
 
           {/* Slide 2 */}
           <div class="carousel-item" style={{ height: '550px' }}>
-            <img src={window.getAssetPath(`images/televital-1.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="Remote Anesthesia" />
+            <img src={window.getAssetPath(`images/televital-1.jpg`)} class="d-block w-100 h-100 object-fit-cover carousel-img-2" alt="Remote Anesthesia" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
@@ -73,7 +73,7 @@ export default function Home() {
 
           {/* Slide 3 */}
           <div class="carousel-item" style={{ height: '550px' }}>
-            <img src={window.getAssetPath(`images/tv-slider-2.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="ISRO Network" />
+            <img src={window.getAssetPath(`images/tv-slider-2.jpg`)} class="d-block w-100 h-100 object-fit-cover carousel-img-3" alt="ISRO Network" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', right: '12px', left: 'auto' }}>
                 <div class="carousel-overlay-card">
@@ -92,7 +92,7 @@ export default function Home() {
 
           {/* Slide 4 */}
           <div class="carousel-item" style={{ height: '550px' }}>
-            <img src={window.getAssetPath(`images/tv-slider-3.jpg`)} class="d-block w-100 h-100 object-fit-cover" alt="PAN African Network" />
+            <img src={window.getAssetPath(`images/tv-slider-3.jpg`)} class="d-block w-100 h-100 object-fit-cover carousel-img-4" alt="PAN African Network" />
             <div class="container h-100 position-absolute top-0 start-50 translate-middle-x">
               <div class="carousel-caption text-start" style={{ bottom: '15%', left: '12px', right: 'auto' }}>
                 <div class="carousel-overlay-card">
