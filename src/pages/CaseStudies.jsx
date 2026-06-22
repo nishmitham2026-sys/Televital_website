@@ -4,7 +4,15 @@ import ImageLightbox from '../components/ImageLightbox';
 
 export default function CaseStudies() {
   const location = useLocation();
-  const path = location.pathname;
+  let path = decodeURIComponent(location.pathname)
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+  
+  if (path.endsWith('/') && path.length > 1) {
+    path = path.slice(0, -1);
+  }
+  
   const [filter, setFilter] = useState('all');
   const [activeUPImage, setActiveUPImage] = useState(null);
 
@@ -156,13 +164,20 @@ export default function CaseStudies() {
   // ==========================================
   const renderNASA = () => (
     <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm">
-      <span class="text-secondary fw-semibold uppercase letter-spacing-1 font-sm d-block mb-1">NASA Program Partner</span>
-      <h2 class="fw-bold text-primary font-heading mb-2">MedITAC / NASA Collaboration</h2>
-      <h4 class="text-muted fw-normal font-heading fs-5 mb-4">First reported remote anesthesia monitoring over the Internet</h4>
+      <div class="row align-items-center g-4 mb-4">
+        <div class="col-lg-8">
+          <span class="text-secondary fw-semibold uppercase letter-spacing-1 font-sm d-block mb-1">NASA Program Partner</span>
+          <h2 class="fw-bold text-primary font-heading mb-2">MedITAC / NASA Collaboration</h2>
+          <h4 class="text-muted fw-normal font-heading fs-5 mb-4">First reported remote anesthesia monitoring over the Internet</h4>
+          <p class="text-muted small lh-lg">
+            Virginia Commonwealth University (VCU) based **Medical Informatics and Technology Applications Consortium (MedITAC)**, a NASA Research Partnership Center, partnered with TeleVital to monitor remote surgeries in Ecuador during 2001 and 2002.
+          </p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <img src={window.getAssetPath('images/nasa.png')} alt="NASA Logo" class="img-fluid bg-light p-3 rounded-4 border" style={{ maxHeight: '180px', objectFit: 'contain' }} />
+        </div>
+      </div>
 
-      <p class="text-muted small lh-lg">
-        Virginia Commonwealth University (VCU) based **Medical Informatics and Technology Applications Consortium (MedITAC)**, a NASA Research Partnership Center, partnered with TeleVital to monitor remote surgeries in Ecuador during 2001 and 2002.
-      </p>
       <p class="text-muted small lh-lg">
         Surgeries were performed in the Cinterandes Foundation Mobile Surgical Facility in Sucúa, Ecuador. The first case, an open cholecystectomy, saw the first known transmission of real-time physiologic parameters for distant anesthetic monitoring. Dr. Lynne Gehr monitored the transmitted data at her desktop in Virginia, 3,000 miles away, utilizing a single 64Kbps satellite connection, while Dr. Patricio Escandon served as the attending anesthesiologist on site.
       </p>
@@ -221,26 +236,27 @@ export default function CaseStudies() {
   // VIEW: Arizona Telemedicine Project
   // ==========================================
   const renderArizona = () => (
-    <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm text-center">
-      <div class="bg-secondary bg-opacity-10 p-3 rounded-circle mx-auto mb-3" style={{ width: 'fit-content' }}>
-        <i class="bi bi-activity text-secondary fs-2"></i>
-      </div>
-      <span class="text-secondary fw-semibold uppercase letter-spacing-1 font-sm d-block mb-1">USA Public Health</span>
-      <h2 class="fw-bold text-primary font-heading mb-3">Arizona Telemedicine Program</h2>
-      <h5 class="text-muted fw-normal font-heading fs-5 mb-4">Asthma Screenings at Lowell Elementary School in Phoenix</h5>
-      
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <p class="text-muted small lh-lg text-start mb-4">
+    <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm">
+      <div class="row align-items-center g-4 mb-4">
+        <div class="col-lg-7 text-start">
+          <span class="text-secondary fw-semibold uppercase letter-spacing-1 font-sm d-block mb-1">USA Public Health</span>
+          <h2 class="fw-bold text-primary font-heading mb-3">Arizona Telemedicine Program</h2>
+          <h5 class="text-muted fw-normal font-heading fs-5 mb-4">Asthma Screenings at Lowell Elementary School in Phoenix</h5>
+          <p class="text-muted small lh-lg">
             The Arizona Telemedicine Program is a large, multidisciplinary, university-based program providing telemedicine services, distance learning, and informatics training to communities throughout Arizona.
           </p>
-          <p class="text-muted small lh-lg text-start mb-4">
+          <p class="text-muted small lh-lg">
             As an initiative of this program, the department utilized TeleVital’s technology at Lowell Elementary School of Phoenix. During 2002, students exhibiting signs or symptoms of asthma were regularly screened using spirometry and oximetry tests. The test results were securely uploaded to a central server, allowing medical specialists throughout Arizona to access records and prescribe timely responses, safeguarding pediatric care.
           </p>
-          <Link to="/case-studies" class="btn btn-primary-custom rounded-pill mt-3">
-            <i class="bi bi-arrow-left me-2"></i> Back to Case Studies
-          </Link>
         </div>
+        <div class="col-lg-5 text-center">
+          <img src={window.getAssetPath('images/arizone_telm_ntwrk.png')} alt="Arizona Telemedicine Map Network" class="img-fluid rounded-3 shadow-sm border w-100" style={{ objectFit: 'contain', height: 'auto', maxHeight: '100%' }} />
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <Link to="/case-studies" class="btn btn-primary-custom rounded-pill">
+          <i class="bi bi-arrow-left me-2"></i> Back to Case Studies List
+        </Link>
       </div>
     </div>
   );
@@ -249,26 +265,27 @@ export default function CaseStudies() {
   // VIEW: Real-time Ambulance Monitoring in Japan
   // ==========================================
   const renderJapan = () => (
-    <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm text-center">
-      <div class="bg-secondary bg-opacity-10 p-3 rounded-circle mx-auto mb-3" style={{ width: 'fit-content' }}>
-        <i class="bi bi-truck-flatbed text-secondary fs-2"></i>
-      </div>
-      <span class="text-secondary fw-semibold uppercase letter-spacing-1 font-sm d-block mb-1">Japan Wireless Demonstration</span>
-      <h2 class="fw-bold text-primary font-heading mb-3">Ambulance Vital Sign Streaming</h2>
-      <h5 class="text-muted fw-normal font-heading fs-5 mb-4">Ehime Medical University Transport Project</h5>
-      
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <p class="text-muted small lh-lg text-start mb-4">
+    <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm">
+      <div class="row align-items-center g-4 mb-4">
+        <div class="col-lg-7 text-start">
+          <span class="text-secondary fw-semibold uppercase letter-spacing-1 font-sm d-block mb-1">Japan Wireless Demonstration</span>
+          <h2 class="fw-bold text-primary font-heading mb-3">Ambulance Vital Sign Streaming</h2>
+          <h5 class="text-muted fw-normal font-heading fs-5 mb-4">Ehime Medical University Transport Project</h5>
+          <p class="text-muted small lh-lg">
             Ehime Medical University executed a wireless patient monitoring demonstration project in Ehime, Japan, coordinated by Dr. Eizen Kimura, M.D. Ph.D., IT Director of Ehime Medical University.
           </p>
-          <p class="text-muted small lh-lg text-start mb-4">
+          <p class="text-muted small lh-lg">
             The project demonstrated the extreme flexibility of TeleVital’s VitalWare technologies, allowing moving vehicles (ambulances) to remain connected to a wireless Wi-Fi network during emergency transport. The demonstration showed an ambulance driving from a car accident site while the patient's 12-lead ECG and real-time video was streamed over Cisco's WLAN. Doctors in the hospital were able to log in and monitor the patient in transit to prepare immediate surgical interventions.
           </p>
-          <Link to="/case-studies" class="btn btn-primary-custom rounded-pill mt-3">
-            <i class="bi bi-arrow-left me-2"></i> Back to Case Studies
-          </Link>
         </div>
+        <div class="col-lg-5 text-center">
+          <img src={window.getAssetPath('images/japan.jpg')} alt="Ambulance Monitoring in Japan" class="img-fluid rounded-3 shadow-sm border w-100" style={{ objectFit: 'contain', height: 'auto', maxHeight: '100%' }} />
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <Link to="/case-studies" class="btn btn-primary-custom rounded-pill">
+          <i class="bi bi-arrow-left me-2"></i> Back to Case Studies List
+        </Link>
       </div>
     </div>
   );
@@ -288,7 +305,7 @@ export default function CaseStudies() {
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <p class="text-muted small lh-lg text-start mb-4">
-            Telehealth Broadband, LLC is a subsidiary of Security Broadband Corporation, which holds strategic alliances with major North American cable operators reaching over 70 million homes.
+            Telehealth Broadband, LLC is a subsidiary of Security Broadband Corporation, which has strategic alliances with the majority of the largest North American cable operators who reach over 70 million homes.
           </p>
           <p class="text-muted small lh-lg text-start mb-4">
             The Healthium service leverage broadband and consumer TV set-top-boxes to deliver interactive health services directly to chronic disease patients and post-surgical patients. It reduces the cost of care and improves outcomes by providing affordable, professionally monitored health evaluations, TV-based vital signs collection, and questionnaire responses over the cable network.
@@ -353,6 +370,21 @@ export default function CaseStudies() {
         The network facilitates online and offline clinical consultations, along with Continuing Medical Education (CME) diploma and certificate programs for medical practitioners.
       </p>
 
+      <div class="row g-3 my-4">
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded overflow-hidden">
+            <img src={window.getAssetPath('images/india-pai.jpg')} alt="Indian Hub Center" class="img-fluid w-100" />
+            <div class="card-body p-2 bg-light text-center small text-muted font-sans">Indian Specialist Hub Operations Control</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded overflow-hidden">
+            <img src={window.getAssetPath('images/africa-pai.jpg')} alt="African Specialist Node" class="img-fluid w-100" />
+            <div class="card-body p-2 bg-light text-center small text-muted font-sans">commissioned Telehealth units in African clinics</div>
+          </div>
+        </div>
+      </div>
+
       <div class="row g-4 mt-4 pt-4 border-top">
         <div class="col-md-6">
           <h5 class="fw-bold text-primary font-heading">Initiative Documents</h5>
@@ -368,7 +400,7 @@ export default function CaseStudies() {
         </div>
       </div>
 
-      <div class="mt-4 pt-2">
+      <div class="mt-4 pt-2 text-center">
         <Link to="/case-studies" class="btn btn-primary-custom rounded-pill">
           <i class="bi bi-arrow-left me-2"></i> Back to Case Studies List
         </Link>
@@ -388,9 +420,18 @@ export default function CaseStudies() {
       <p class="text-muted small lh-lg">
         Established in 1975, the Karnataka State Council for Science and Technology (KSCST) along with the Indian Institute of Science (IISc) launched Virtual Laboratories in 10 rural high schools located in backward talukas of Karnataka.
       </p>
-      <p class="text-muted small lh-lg">
+      <p class="text-muted small lh-lg mb-4">
         The objective is to improve the quality of education via collaborative learning through state-of-the-art IT platforms and electronic content. The system simulates a real classroom experience, allowing students to visualize complex concepts, perform webinars, participate in webinars, and engage in formative assessments.
       </p>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <img src={window.getAssetPath('images/rural-edu-1.png')} alt="Students learning online" class="img-fluid rounded shadow-sm w-100" />
+        </div>
+        <div class="col-md-6">
+          <img src={window.getAssetPath('images/rural-edu-2.png')} alt="Virtual Lab Setup" class="img-fluid rounded shadow-sm w-100" />
+        </div>
+      </div>
 
       <div class="row g-4 mt-4 pt-4 border-top">
         <div class="col-md-6">
@@ -412,7 +453,7 @@ export default function CaseStudies() {
         </div>
       </div>
 
-      <div class="mt-4 pt-2">
+      <div class="mt-4 pt-2 text-center">
         <Link to="/case-studies" class="btn btn-primary-custom rounded-pill">
           <i class="bi bi-arrow-left me-2"></i> Back to Case Studies List
         </Link>

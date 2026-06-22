@@ -4,7 +4,15 @@ import ImageLightbox from '../components/ImageLightbox';
 
 export default function MediaPages() {
   const location = useLocation();
-  const path = location.pathname;
+  let path = decodeURIComponent(location.pathname)
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+  
+  if (path.endsWith('/') && path.length > 1) {
+    path = path.slice(0, -1);
+  }
+  
   const [activeImage, setActiveImage] = useState(null);
   const [newsFilter, setNewsFilter] = useState('all');
 

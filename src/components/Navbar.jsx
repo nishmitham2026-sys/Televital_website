@@ -60,8 +60,18 @@ export default function Navbar() {
     });
   };
 
-  const isActive = (path) => location.pathname === path;
-  const isDropdownActive = (prefix) => location.pathname.startsWith(prefix);
+  const normalizePath = (p) => {
+    let clean = decodeURIComponent(p)
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+    if (clean.endsWith('/') && clean.length > 1) {
+      clean = clean.slice(0, -1);
+    }
+    return clean;
+  };
+  const isActive = (path) => normalizePath(location.pathname) === normalizePath(path);
+  const isDropdownActive = (prefix) => normalizePath(location.pathname).startsWith(normalizePath(prefix));
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light sticky-top glass-header py-3">
