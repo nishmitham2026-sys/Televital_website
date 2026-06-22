@@ -304,19 +304,29 @@ export default function ELearning() {
           </div>
         </div>
 
-        <div class="card border border-primary border-opacity-25 bg-light p-4 rounded-3 mb-4">
-          <div class="row align-items-center g-3">
-            <div class="col-auto">
-              <img src={window.getAssetPath(`images/iisc.png`)} alt="IISc Logo" class="img-fluid bg-white p-2 rounded border" style={{ width: '70px', height: '70px', objectFit: 'contain' }} />
+        <div class="card border border-primary border-opacity-25 bg-light p-4 rounded-4 mb-4 text-start">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="bg-primary bg-opacity-10 p-2.5 rounded-3 text-primary" style={{ width: 'fit-content' }}>
+              <i class="bi bi-mortarboard-fill fs-3"></i>
             </div>
-            <div class="col">
-              <h5 class="fw-bold text-primary font-heading d-flex align-items-center gap-2 mb-1">
-                Featured Implementation: IISc Bangalore
-              </h5>
-              <p class="small text-muted mb-0 lh-base">
-                Implemented at the prestigious Indian Institute of Science (IISc), Bangalore. The system records complex seminars, research panels, and engineering modules, enabling continuous learning access across departments.
-              </p>
+            <div>
+              <h4 class="fw-bold text-primary font-heading mb-1">Featured Implementation: IISc Bangalore</h4>
+              <p class="text-muted small mb-0">TeleVital Solution implemented at Indian Institute of Science Bangalore</p>
             </div>
+          </div>
+          <p class="text-muted small lh-lg mb-4">
+            Implemented at the prestigious Indian Institute of Science (IISc), Bangalore. The system records complex seminars, research panels, and engineering modules, enabling continuous learning access across departments.
+          </p>
+          <div class="text-center">
+            <div class="p-2 bg-white border rounded-3 shadow-sm d-inline-block" style={{ maxWidth: '850px', width: '100%' }}>
+              <img 
+                src={window.getAssetPath(`images/iisc.png`)} 
+                alt="IISc Video Archive Portal Screenshot" 
+                class="img-fluid rounded-2" 
+                style={{ objectFit: 'contain', width: '100%' }} 
+              />
+            </div>
+            <div class="mt-2 small text-muted font-sans italic">IISc Bangalore Video Archive Portal Web Console</div>
           </div>
         </div>
 
