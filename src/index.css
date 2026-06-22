@@ -381,54 +381,110 @@ a {
 
 /* Mobile Responsive Overrides for Hero Carousel and Caption Cards */
 @media (max-width: 767.98px) {
-  .carousel-item {
+  /* Target active or transitioning slides to maintain standard carousel transitions */
+  .slide-left-img.active,
+  .slide-left-img.carousel-item-next,
+  .slide-left-img.carousel-item-prev,
+  .slide-right-img.active,
+  .slide-right-img.carousel-item-next,
+  .slide-right-img.carousel-item-prev {
+    display: flex !important;
     height: 380px !important;
+    align-items: center !important;
   }
   
-  .carousel-caption {
-    left: 5% !important;
-    right: 5% !important;
-    bottom: 5% !important;
-    width: 90% !important;
+  .slide-left-img {
+    flex-direction: row !important;
+  }
+  
+  .slide-right-img {
+    flex-direction: row-reverse !important;
+  }
+
+  /* Split layout image rules */
+  .slide-left-img img,
+  .slide-right-img img {
+    position: relative !important;
+    width: 45% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Split layout text container rules */
+  .slide-left-img .container,
+  .slide-right-img .container {
+    position: relative !important;
+    width: 55% !important;
+    height: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin: 0 !important;
     padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
   }
-  
-  .carousel-overlay-card {
-    padding: 1rem 1.25rem !important;
+
+  .slide-left-img .carousel-caption,
+  .slide-right-img .carousel-caption {
+    position: static !important;
+    width: 100% !important;
+    padding: 0.5rem !important;
+    margin: 0 !important;
+  }
+
+  .slide-left-img .carousel-overlay-card,
+  .slide-right-img .carousel-overlay-card {
+    padding: 1rem 0.75rem !important;
     max-width: 100% !important;
-    border-radius: 16px !important;
-    background: rgba(12, 35, 64, 0.9) !important;
+    border-radius: 12px !important;
+    background: rgba(12, 35, 64, 0.95) !important;
+    border: none !important;
+    box-shadow: var(--shadow-md) !important;
+    text-align: left !important;
   }
-  
+
+  /* Compact text styling inside caption cards */
   .carousel-overlay-card h1 {
-    font-size: 1.2rem !important;
-    margin-bottom: 0.3rem !important;
+    font-size: 1.05rem !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .carousel-overlay-card p {
+    font-size: 0.7rem !important;
+    margin-bottom: 0.5rem !important;
     line-height: 1.3 !important;
   }
-  
-  .carousel-overlay-card p {
-    font-size: 0.75rem !important;
-    margin-bottom: 0.6rem !important;
-    line-height: 1.35 !important;
-  }
-  
+
   .carousel-overlay-card .btn {
-    padding: 0.35rem 0.9rem !important;
-    font-size: 0.75rem !important;
+    padding: 0.3rem 0.7rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .carousel-overlay-card .badge {
+    font-size: 0.6rem !important;
+    padding: 0.15rem 0.4rem !important;
+    margin-bottom: 0.25rem !important;
   }
 
   /* Focus the primary subject of the landscape images on mobile */
   .carousel-img-1 {
-    object-position: 25% center !important;
+    object-position: 20% center !important; /* Focuses the BP checking & patient on left */
   }
   .carousel-img-2 {
-    object-position: 75% center !important;
+    object-position: 15% center !important; /* Focuses the nurse holding a tablet on left */
   }
   .carousel-img-3 {
-    object-position: center center !important;
+    object-position: 25% center !important; /* Focuses the Earth globe on left */
   }
   .carousel-img-4 {
-    object-position: 80% center !important;
+    object-position: 80% center !important; /* Focuses the African child on right */
   }
 }
 
