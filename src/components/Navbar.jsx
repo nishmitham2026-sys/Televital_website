@@ -235,25 +235,7 @@ export default function Navbar() {
               </Link>
             </li>
 
-            <li class="nav-item d-none d-lg-block ms-2">
-              <a
-                class="btn btn-primary-custom rounded-pill"
-                href="#"
-                onClick={handleLogin}
-              >
-                Login
-              </a>
-            </li>
 
-            <li class="nav-item d-lg-none mt-2 px-3">
-              <a
-                class="btn btn-primary-custom rounded-pill w-100"
-                href="#"
-                onClick={handleLogin}
-              >
-                Login
-              </a>
-            </li>
           </ul>
         </div>
       </div>

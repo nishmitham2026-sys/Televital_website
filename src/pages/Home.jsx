@@ -22,7 +22,7 @@ export default function Home() {
   ];
 
   return (
-    <div>
+    <div class="home-page-container">
       {/* Hero Carousel */}
       <div id="homeHeroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-indicators">

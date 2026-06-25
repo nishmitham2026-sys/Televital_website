@@ -488,4 +488,57 @@ a {
   }
 }
 
+/* Custom Light Blue Footer Styling */
+.footer-light-blue {
+  background-color: #e0f2fe !important; /* Premium sky/light blue */
+  color: var(--primary) !important;
+}
+
+.footer-light-blue h5 {
+  color: var(--primary) !important;
+  border-bottom-color: var(--secondary) !important;
+}
+
+.footer-light-blue p {
+  color: #334155 !important; /* Slate 700 for premium typography contrast */
+}
+
+.footer-light-blue a {
+  color: #334155 !important;
+  transition: var(--transition-smooth);
+}
+
+.footer-light-blue a:hover,
+.footer-light-blue a.hover-teal:hover {
+  color: var(--secondary) !important;
+}
+
+.footer-light-blue hr {
+  border-color: var(--primary) !important;
+  opacity: 0.15 !important;
+}
+
+.footer-light-blue .text-white-50 {
+  color: #475569 !important; /* Slate 600 */
+}
+
+.footer-light-blue .text-white {
+  color: var(--primary) !important;
+}
+
+.footer-light-blue .btn-link {
+  color: #475569 !important;
+}
+
+.footer-light-blue .btn-link:hover {
+  color: var(--secondary) !important;
+}
+
+/* Home Page specific heading color overrides */
+.home-page-container h2.text-primary,
+.home-page-container h3.text-primary,
+.home-page-container h4.text-primary {
+  color: #1e40af !important; /* Premium, vibrant royal blue (lighter than navy) */
+}
+
 
