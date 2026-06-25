@@ -541,4 +541,14 @@ a {
   color: #1e40af !important; /* Premium, vibrant royal blue (lighter than navy) */
 }
 
+/* Scoped Navbar Link Color Customization */
+.navbar-nav .nav-link.text-primary {
+  color: #1e40af !important; /* Premium royal blue matching "Decade of Telemedicine" */
+  transition: var(--transition-smooth);
+}
+
+.navbar-nav .nav-link.text-primary:hover {
+  color: var(--secondary) !important; /* Elegant teal transition on hover */
+}
+
 
