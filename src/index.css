@@ -533,17 +533,20 @@ a {
 .footer-light-blue .btn-link:hover {
   color: var(--secondary) !important;
 }
-
-/* Home Page specific heading color overrides */
-.home-page-container h2.text-primary,
-.home-page-container h3.text-primary,
-.home-page-container h4.text-primary {
-  color: #1e40af !important; /* Premium, vibrant royal blue (lighter than navy) */
+/* Global primary text and heading color override (vibrant premium royal blue) */
+.text-primary,
+h1.text-primary,
+h2.text-primary,
+h3.text-primary,
+h4.text-primary,
+h5.text-primary,
+h6.text-primary {
+  color: #1e40af !important;
 }
 
 /* Scoped Navbar Link Color Customization */
 .navbar-nav .nav-link.text-primary {
-  color: #1e40af !important; /* Premium royal blue matching "Decade of Telemedicine" */
+  color: #1e40af !important; /* Premium royal blue matching headings */
   transition: var(--transition-smooth);
 }
 
