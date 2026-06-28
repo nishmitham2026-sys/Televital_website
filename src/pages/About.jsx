@@ -197,6 +197,9 @@ export default function About() {
               Revel in modern-day clinical connectivity. Dive into the TeleVital experience and take charge of your healthcare journey.
             </p>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
+              <a href="#" onClick={handleSignUp} class="btn btn-primary-custom rounded-pill px-4 py-2 fw-medium">
+                Sign Up Now <i class="bi bi-chevron-right ms-1"></i>
+              </a>
               <Link to="/contact" class="btn btn-light text-primary rounded-pill px-4 py-2 fw-medium border-0">
                 Contact Us
               </Link>
