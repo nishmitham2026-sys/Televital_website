@@ -4,6 +4,7 @@ import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-d
 // Layout Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import LiveVisitorAnalytics from './components/LiveVisitorAnalytics';
 
 // Page Components
 import Home from './pages/Home';
@@ -80,6 +81,9 @@ export default function App() {
 
       {/* Footer Navigation */}
       <Footer />
+
+      {/* Live Visitor Analytics Widget */}
+      <LiveVisitorAnalytics />
     </Router>
   );
 }

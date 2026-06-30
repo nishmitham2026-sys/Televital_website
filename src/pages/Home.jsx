@@ -121,7 +121,7 @@ export default function Home() {
       </div>
 
       {/* Intro / Decade of Telemedicine Section */}
-      <section class="section-padding bg-white">
+      <section id="about-section" class="section-padding bg-white">
         <div class="container text-center">
           <span class="text-secondary fw-semibold uppercase letter-spacing-2 font-sm d-block mb-2">A Legacy of Care</span>
           <h2 class="section-title center fw-bold text-primary mb-4">Decade of Telemedicine Experience</h2>
@@ -137,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Main Core Offerings Cards */}
-      <section class="section-padding bg-light-accent">
+      <section id="features-section" class="section-padding bg-light-accent">
         <div class="container">
           <div class="row g-4">
             {/* Offering 1 */}
@@ -192,7 +192,7 @@ export default function Home() {
       </section>
 
       {/* Here is a look at what we've been working (Historic Gallery Grid) */}
-      <section class="section-padding bg-white">
+      <section id="impact-section" class="section-padding bg-white">
         <div class="container">
           <div class="text-center mb-5">
             <h2 class="section-title center fw-bold text-primary">Here is a look at what we have been working</h2>
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* Clients & Partners Infinite Marquee */}
-      <section class="py-5 bg-light border-top border-bottom">
+      <section id="partner-section" class="py-5 bg-light border-top border-bottom">
         <div class="container text-center mb-4">
           <h3 class="fw-bold text-primary font-heading mb-1">Clients & Partners</h3>
           <p class="text-muted small">Collaborations with leading space, government, and healthcare institutions worldwide</p>

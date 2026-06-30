@@ -21,7 +21,7 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, subject, message } = formData;
-    
+
     if (!name || !email || !subject || !message) {
       Swal.fire({
         title: 'Validation Error',
@@ -97,17 +97,11 @@ export default function Contact() {
             <div class="premium-card bg-white p-4">
               <div class="d-flex align-items-center mb-3">
                 <div class="bg-secondary bg-opacity-10 p-2 rounded-circle me-3 text-secondary">
-                  <i class="bi bi-geo-alt-fill fs-4"></i>
+                  <i class="bi bi-telephone-fill fs-4"></i>
                 </div>
                 <h4 class="fw-bold text-primary mb-0 font-heading">India Headquarters</h4>
               </div>
-              <address class="small text-muted lh-lg mb-3 font-sans">
-                <strong class="text-primary d-block mb-1">TeleVital India Pvt. Ltd.</strong>
-                PESIT Tech Park, 2nd Floor,<br />
-                100 Feet Ring Road, BSK III Stage,<br />
-                BANGALORE - 560 085.
-              </address>
-              <div class="border-top pt-2 small text-muted font-sans">
+              <div class="pt-2 small text-muted font-sans">
                 <div class="d-flex justify-content-between mb-1">
                   <span>Sales Assistance:</span>
                   <span class="text-primary fw-medium">+91 9448090037</span>
@@ -131,17 +125,11 @@ export default function Contact() {
             <div class="premium-card bg-white p-4">
               <div class="d-flex align-items-center mb-3">
                 <div class="bg-secondary bg-opacity-10 p-2 rounded-circle me-3 text-secondary">
-                  <i class="bi bi-geo-alt-fill fs-4"></i>
+                  <i class="bi bi-telephone-fill fs-4"></i>
                 </div>
                 <h4 class="fw-bold text-primary mb-0 font-heading">US Branch</h4>
               </div>
-              <address class="small text-muted lh-lg mb-3 font-sans">
-                <strong class="text-primary d-block mb-1">TeleVital Solutions</strong>
-                2350 Mission College Blvd #777,<br />
-                Santa Clara, CA 95054,<br />
-                USA
-              </address>
-              <div class="border-top pt-2 small text-muted font-sans d-flex justify-content-between">
+              <div class="pt-2 small text-muted font-sans d-flex justify-content-between">
                 <span>Phone Assistance:</span>
                 <span class="text-primary fw-medium">+1 (408) 441 6732</span>
               </div>
@@ -156,36 +144,36 @@ export default function Contact() {
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label for="name" class="form-label small text-muted font-sans">Full Name <span class="text-danger">*</span></label>
-                    <input 
-                      type="text" 
-                      class="form-control rounded-pill py-2 px-3 small" 
+                    <input
+                      type="text"
+                      class="form-control rounded-pill py-2 px-3 small"
                       id="name"
                       name="name"
                       placeholder="Enter name"
                       value={formData.name}
                       onChange={handleChange}
-                      required 
+                      required
                     />
                   </div>
                   <div class="col-md-6">
                     <label for="email" class="form-label small text-muted font-sans">Email Address <span class="text-danger">*</span></label>
-                    <input 
-                      type="email" 
-                      class="form-control rounded-pill py-2 px-3 small" 
-                      id="email" 
+                    <input
+                      type="email"
+                      class="form-control rounded-pill py-2 px-3 small"
+                      id="email"
                       name="email"
                       placeholder="name@example.com"
                       value={formData.email}
                       onChange={handleChange}
-                      required 
+                      required
                     />
                   </div>
                   <div class="col-md-12">
                     <label for="phone" class="form-label small text-muted font-sans">Phone Number (Optional)</label>
-                    <input 
-                      type="tel" 
-                      class="form-control rounded-pill py-2 px-3 small" 
-                      id="phone" 
+                    <input
+                      type="tel"
+                      class="form-control rounded-pill py-2 px-3 small"
+                      id="phone"
                       name="phone"
                       placeholder="e.g. +91 9876543210"
                       value={formData.phone}
@@ -194,24 +182,24 @@ export default function Contact() {
                   </div>
                   <div class="col-md-12">
                     <label for="subject" class="form-label small text-muted font-sans">Subject <span class="text-danger">*</span></label>
-                    <input 
-                      type="text" 
-                      class="form-control rounded-pill py-2 px-3 small" 
-                      id="subject" 
+                    <input
+                      type="text"
+                      class="form-control rounded-pill py-2 px-3 small"
+                      id="subject"
                       name="subject"
                       placeholder="What is this regarding?"
                       value={formData.subject}
                       onChange={handleChange}
-                      required 
+                      required
                     />
                   </div>
                   <div class="col-md-12">
                     <label for="message" class="form-label small text-muted font-sans">Message Content <span class="text-danger">*</span></label>
-                    <textarea 
-                      class="form-control rounded-4 py-2 px-3 small" 
-                      id="message" 
+                    <textarea
+                      class="form-control rounded-4 py-2 px-3 small"
+                      id="message"
                       name="message"
-                      rows="5" 
+                      rows="5"
                       placeholder="Enter message text here..."
                       value={formData.message}
                       onChange={handleChange}
@@ -219,7 +207,7 @@ export default function Contact() {
                     ></textarea>
                   </div>
                   <div class="col-12 mt-4 text-end">
-                    <button type="submit" class="btn btn-secondary-custom rounded-pill px-4">
+                    <button type="submit" class="btn btn-secondary-custom rounded-pill px-4" disabled>
                       Submit Message <i class="bi bi-send-fill ms-2 font-sm"></i>
                     </button>
                   </div>

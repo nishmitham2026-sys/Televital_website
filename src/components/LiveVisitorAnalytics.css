@@ -1,0 +1,345 @@
+/* Live Visitor Analytics CSS styling */
+
+:root {
+  --teal: #00a896;
+  --teal-light: #05c3ad;
+  --teal-rgb: 0, 168, 150;
+  --dark-blue: #0c2340;
+  --emerald: #10b981;
+}
+
+/* Floating Action Button (FAB) */
+.analytics-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--teal);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1040;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.analytics-launcher:hover {
+  background-color: var(--teal-light);
+  transform: scale(1.08) rotate(5deg);
+  box-shadow: 0 8px 24px rgba(0, 168, 150, 0.3);
+}
+
+.analytics-launcher:active {
+  transform: scale(0.95);
+}
+
+/* Launcher Badge */
+.analytics-launcher .badge-live {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  font-size: 0.65rem;
+  padding: 3px 6px;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  border: 2px solid #ffffff;
+  animation: pulseBadge 2s infinite;
+}
+
+/* Telemetry pulse glow effect */
+.telemetry-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  opacity: 0.8;
+  animation: telemetryPulse 2s infinite ease-out;
+  pointer-events: none;
+}
+
+/* Drawer Container */
+.analytics-drawer {
+  position: fixed;
+  top: 0;
+  right: -430px; /* Hidden offscreen by default */
+  width: 420px;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: -4px 0 30px rgba(12, 35, 64, 0.15);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.analytics-drawer.open {
+  right: 0;
+}
+
+/* Overlay Backdrop */
+.analytics-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1045;
+  animation: fadeInBackdrop 0.3s ease-out;
+}
+
+/* Drawer Header */
+.analytics-header {
+  padding: 20px 24px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.shield-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--emerald) !important;
+  border-radius: 10px;
+}
+
+.btn-close-analytics {
+  background: transparent;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+.btn-close-analytics:hover {
+  background-color: rgba(100, 116, 139, 0.1);
+  color: var(--dark-blue);
+}
+
+/* Drawer Body Content */
+.analytics-body {
+  padding: 24px;
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Sleek Webkit Scrollbar */
+.analytics-body::-webkit-scrollbar,
+.session-logs-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.analytics-body::-webkit-scrollbar-track,
+.session-logs-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.analytics-body::-webkit-scrollbar-thumb,
+.session-logs-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.analytics-body::-webkit-scrollbar-thumb:hover,
+.session-logs-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Section Subtitle Layout */
+.section-subtitle {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+/* Active Session Card Styling */
+.analytics-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(12, 35, 64, 0.02);
+}
+
+.analytics-card:hover {
+  border-color: rgba(0, 168, 150, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 168, 150, 0.08);
+}
+
+.card-flag-code {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--dark-blue);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.card-icon {
+  font-size: 1.4rem;
+  margin-bottom: 2px;
+  color: var(--teal) !important;
+}
+
+.card-value-primary {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--teal) !important;
+}
+
+.card-label-secondary {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Section Browse Path Badges */
+.browse-path-container {
+  max-height: 100px;
+  overflow-y: auto;
+  border-color: #e2e8f0 !important;
+}
+
+.badge-browse-section {
+  display: inline-block;
+  background-color: rgba(5, 195, 173, 0.12);
+  color: #008779;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  animation: scaleInBadge 0.2s ease-out;
+}
+
+/* Heatmap Row Layout */
+.heatmap-progress-bar {
+  background-color: #f1f5f9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.heatmap-fill {
+  background-color: var(--teal) !important;
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Simulator controls card */
+.simulator-controls-card {
+  border-color: #e2e8f0 !important;
+}
+
+.select-simulator {
+  border: 1px solid #cbd5e1;
+  font-weight: 500;
+  color: var(--dark-blue);
+  padding: 10px 14px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.select-simulator:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(0, 168, 150, 0.15);
+}
+
+/* Local Session Logs List */
+.session-logs-list {
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.log-item {
+  border-color: #f1f5f9 !important;
+  transition: all 0.2s ease;
+}
+
+.log-item:hover {
+  transform: translateX(-2px);
+  box-shadow: 0 4px 10px rgba(12, 35, 64, 0.05) !important;
+}
+
+.badge-duration-pill {
+  background-color: rgba(0, 168, 150, 0.1) !important;
+  color: var(--teal) !important;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Animations */
+@keyframes telemetryPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseBadge {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(220, 53, 69, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+  }
+}
+
+@keyframes fadeInBackdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleInBadge {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
