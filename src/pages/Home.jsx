@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Carousel } from 'bootstrap';
 
 export default function Home() {
+  const carouselRef = useRef(null);
+
+  useEffect(() => {
+    let carouselInstance = null;
+    if (carouselRef.current) {
+      // Initialize the Bootstrap carousel programmatically to ensure it auto-plays in React
+      carouselInstance = new Carousel(carouselRef.current, {
+        interval: 5000, // Move every 5 seconds
+        ride: 'carousel',
+        wrap: true
+      });
+      // Start cycling
+      carouselInstance.cycle();
+    }
+    return () => {
+      if (carouselInstance) {
+        carouselInstance.dispose();
+      }
+    };
+  }, []);
+
   const partners = [
     { name: 'NASA', logo: window.getAssetPath('images/logo/nasa.jpg') },
     { name: 'ISRO', logo: window.getAssetPath('images/logo/isro.jpg') },
     { name: 'TCIL', logo: window.getAssetPath('images/logo/tcil.jpg') },
     { name: 'KSCST', logo: window.getAssetPath('images/kscst.jpg') },
     { name: 'IISc', logo: window.getAssetPath('images/logo/iisc.jpg') },
-    { name: 'Narayana', logo: window.getAssetPath('images/logo/narayana.jpg') },
     { name: 'Manipal', logo: window.getAssetPath('images/manipal.jpg') },
+    { name: 'Narayana', logo: window.getAssetPath('images/logo/narayana.jpg') },
     { name: 'Asian Heart', logo: window.getAssetPath('images/logo/asian-heart-institute.jpg') },
     { name: 'Star Health', logo: window.getAssetPath('images/logo/start-health.jpg') },
     { name: 'Nevada', logo: window.getAssetPath('images/logo/nevada.jpg') },
@@ -24,7 +46,13 @@ export default function Home() {
   return (
     <div class="home-page-container">
       {/* Hero Carousel */}
-      <div id="homeHeroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+      <div 
+        ref={carouselRef}
+        id="homeHeroCarousel" 
+        class="carousel slide carousel-fade" 
+        data-bs-ride="carousel" 
+        data-bs-interval="5000"
+      >
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#homeHeroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#homeHeroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
