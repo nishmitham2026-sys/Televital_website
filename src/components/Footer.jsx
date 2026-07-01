@@ -119,7 +119,7 @@ export default function Footer() {
                 <div>
                   <span class="d-block text-white font-sans font-sm">India: 080 26420001</span>
                   <span class="d-block">Sales: 9448090037</span>
-                  <span class="d-block">Tech Support: 9448489895</span>
+                  <span class="d-block">Tech Support: 9448100040</span>
                 </div>
               </li>
               <li class="d-flex align-items-center gap-2">
