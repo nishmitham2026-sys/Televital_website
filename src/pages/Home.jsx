@@ -12,7 +12,8 @@ export default function Home() {
       carouselInstance = new Carousel(carouselRef.current, {
         interval: 5000, // Move every 5 seconds
         ride: 'carousel',
-        wrap: true
+        wrap: true,
+        pause: false
       });
       // Start cycling
       carouselInstance.cycle();
