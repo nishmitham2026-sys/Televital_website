@@ -108,7 +108,7 @@ export default function Contact() {
                 </div>
                 <div class="d-flex justify-content-between mb-1">
                   <span>Technical Support:</span>
-                  <span class="text-primary fw-medium">+91 9448489895</span>
+                  <span class="text-primary fw-medium">+91 9448100040</span>
                 </div>
                 <div class="d-flex justify-content-between mb-1">
                   <span>Customer Support:</span>
