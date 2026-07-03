@@ -12,6 +12,10 @@ export default function MediaPages() {
   if (path.endsWith('/') && path.length > 1) {
     path = path.slice(0, -1);
   }
+
+  if (path === '/media') {
+    path = '/media/video';
+  }
   
   const [activeImage, setActiveImage] = useState(null);
   const [newsFilter, setNewsFilter] = useState('all');
@@ -88,24 +92,24 @@ export default function MediaPages() {
   // ==========================================
   const renderVideos = () => (
     <div>
-      <div class="text-center mb-5">
-        <h1 class="fw-extrabold text-primary mb-2">Video Gallery</h1>
-        <p class="text-muted small">Watch historical coverage, surgery streams, and documentaries detailing TeleVital implementations.</p>
+      <div className="text-center mb-5">
+        <h1 className="fw-extrabold text-primary mb-2">Video Gallery</h1>
+        <p className="text-muted small">Watch historical coverage, surgery streams, and documentaries detailing TeleVital implementations.</p>
       </div>
-      <div class="row g-4">
+      <div className="row g-4">
         {videos.map((vid, idx) => (
-          <div key={idx} class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-100">
-              <div class="ratio ratio-16x9">
+          <div key={idx} className="col-md-6 col-lg-4">
+            <div className="card border-0 shadow-sm rounded-3 overflow-hidden h-100">
+              <div className="ratio ratio-16x9">
                 <iframe 
                   src={vid.url} 
                   title={vid.title} 
                   allowFullScreen
-                  class="border-0"
+                  className="border-0"
                 ></iframe>
               </div>
-              <div class="card-body video-card-body p-3 text-start">
-                <h5 class="fw-bold text-primary font-heading fs-6 mb-0">{vid.title}</h5>
+              <div className="card-body video-card-body p-3 text-start">
+                <h5 className="fw-bold text-primary font-heading fs-6 mb-0">{vid.title}</h5>
               </div>
             </div>
           </div>
@@ -121,20 +125,20 @@ export default function MediaPages() {
     const filteredNews = newsItems.filter(item => newsFilter === 'all' || item.type === newsFilter);
     return (
       <div>
-        <div class="text-center mb-4">
-          <h1 class="fw-extrabold text-primary mb-2">In News</h1>
-          <p class="text-muted small">Newspaper clippings, press releases, and articles featuring TeleVital deployments worldwide.</p>
+        <div className="text-center mb-4">
+          <h1 className="fw-extrabold text-primary mb-2">In News</h1>
+          <p className="text-muted small">Newspaper clippings, press releases, and articles featuring TeleVital deployments worldwide.</p>
           
-          <div class="d-flex justify-content-center mt-3">
-            <div class="nav nav-pills bg-white p-2 rounded-pill border shadow-sm" style={{ width: 'fit-content' }}>
+          <div className="d-flex justify-content-center mt-3">
+            <div className="nav nav-pills bg-white p-2 rounded-pill border shadow-sm" style={{ width: 'fit-content' }}>
               <button 
-                class={`nav-link rounded-pill px-4 fw-medium border-0 ${newsFilter === 'all' ? 'bg-secondary text-white' : 'text-primary'}`}
+                className={`nav-link rounded-pill px-4 fw-medium border-0 ${newsFilter === 'all' ? 'bg-secondary text-white' : 'text-primary'}`}
                 onClick={() => setNewsFilter('all')}
               >
                 Show All
               </button>
               <button 
-                class={`nav-link rounded-pill px-4 fw-medium border-0 ${newsFilter === 'international' ? 'bg-secondary text-white' : 'text-primary'}`}
+                className={`nav-link rounded-pill px-4 fw-medium border-0 ${newsFilter === 'international' ? 'bg-secondary text-white' : 'text-primary'}`}
                 onClick={() => setNewsFilter('international')}
               >
                 International
@@ -143,18 +147,18 @@ export default function MediaPages() {
           </div>
         </div>
 
-        <div class="row g-4">
+        <div className="row g-4">
           {filteredNews.map((item) => (
-            <div key={item.id} class="col-sm-6 col-md-4">
+            <div key={item.id} className="col-sm-6 col-md-4">
               <div 
-                class="img-hover-scale" 
+                className="img-hover-scale" 
                 style={{ height: '260px' }}
                 onClick={() => setActiveImage(item)}
               >
                 <img 
                   src={item.src} 
                   alt={item.title} 
-                  class="w-100 h-100 object-fit-cover" 
+                  className="w-100 h-100 object-fit-cover" 
                 />
               </div>
             </div>
@@ -169,26 +173,26 @@ export default function MediaPages() {
   // ==========================================
   const renderTestimonials = () => (
     <div>
-      <div class="text-center mb-5">
-        <h1 class="fw-extrabold text-primary mb-2">Testimonials</h1>
-        <p class="text-muted small">Hear from clinical directors, chief surgeons, and space center managers utilizing TeleVital solutions.</p>
+      <div className="text-center mb-5">
+        <h1 className="fw-extrabold text-primary mb-2">Testimonials</h1>
+        <p className="text-muted small">Hear from clinical directors, chief surgeons, and space center managers utilizing TeleVital solutions.</p>
       </div>
-      <div class="row g-4">
+      <div className="row g-4">
         {testimonials.map((test, idx) => (
-          <div key={idx} class="col-md-6">
-            <div class="premium-card testimonial-card p-4 h-100">
-              <p class="text-muted fs-6 italic lh-lg mb-4 flex-grow-1">
+          <div key={idx} className="col-md-6">
+            <div className="premium-card testimonial-card p-4 h-100">
+              <p className="text-muted fs-6 italic lh-lg mb-4 flex-grow-1">
                 "{test.quote}"
               </p>
-              <div class="d-flex align-items-center mt-auto border-top pt-3">
+              <div className="d-flex align-items-center mt-auto border-top pt-3">
                 <img 
                   src={test.avatar} 
                   alt={test.author} 
-                  class="testimonial-avatar me-3" 
+                  className="testimonial-avatar me-3" 
                 />
-                <div class="text-start">
-                  <h5 class="fw-bold text-primary mb-0 font-heading fs-6">{test.author}</h5>
-                  <span class="text-muted small">{test.role}</span>
+                <div className="text-start">
+                  <h5 className="fw-bold text-primary mb-0 font-heading fs-6">{test.author}</h5>
+                  <span className="text-muted small">{test.role}</span>
                 </div>
               </div>
             </div>
@@ -203,24 +207,24 @@ export default function MediaPages() {
   // ==========================================
   const renderGallery = () => (
     <div>
-      <div class="text-center mb-5">
-        <h1 class="fw-extrabold text-primary mb-2">Image Gallery</h1>
-        <p class="text-muted small">Review our archive of telemedicine installations, e-learning classrooms, and historical government milestones.</p>
+      <div className="text-center mb-5">
+        <h1 className="fw-extrabold text-primary mb-2">Image Gallery</h1>
+        <p className="text-muted small">Review our archive of telemedicine installations, e-learning classrooms, and historical government milestones.</p>
       </div>
-      <div class="row g-3">
+      <div className="row g-3">
         {galleryItems.map((item) => (
-          <div key={item.id} class="col-sm-6 col-md-4 col-lg-3">
+          <div key={item.id} className="col-sm-6 col-md-4 col-lg-3">
             <div 
-              class="img-hover-scale position-relative" 
+              className="img-hover-scale position-relative" 
               style={{ height: '200px' }}
               onClick={() => setActiveImage(item)}
             >
               <img 
                 src={item.src} 
                 alt={item.title} 
-                class="w-100 h-100 object-fit-cover" 
+                className="w-100 h-100 object-fit-cover" 
               />
-              <div class="position-absolute bottom-0 start-0 end-0 bg-dark bg-opacity-75 p-2 text-center text-white small opacity-0 hover-opacity-100 transition-opacity">
+              <div className="position-absolute bottom-0 start-0 end-0 bg-dark bg-opacity-75 p-2 text-center text-white small opacity-0 hover-opacity-100 transition-opacity">
                 {item.title}
               </div>
             </div>
@@ -238,14 +242,14 @@ export default function MediaPages() {
   };
 
   return (
-    <div class="py-5 bg-light">
-      <div class="container">
+    <div className="py-5 bg-light">
+      <div className="container">
         {/* Navigation Breadcrumbs */}
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb custom-breadcrumb mb-4">
-            <li class="breadcrumb-item"><Link to="/" class="text-primary font-sm">Home</Link></li>
-            <li class="breadcrumb-item"><a href="#" class="text-primary font-sm">Media</a></li>
-            <li class="breadcrumb-item active text-muted font-sm" aria-current="page">{getSubpageTitle()}</li>
+          <ol className="breadcrumb custom-breadcrumb mb-4">
+            <li className="breadcrumb-item"><Link to="/" className="text-primary font-sm">Home</Link></li>
+            <li className="breadcrumb-item"><a href="#" className="text-primary font-sm">Media</a></li>
+            <li className="breadcrumb-item active text-muted font-sm" aria-current="page">{getSubpageTitle()}</li>
           </ol>
         </nav>
 

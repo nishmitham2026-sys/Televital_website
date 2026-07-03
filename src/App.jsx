@@ -63,6 +63,7 @@ export default function App() {
           <Route path="/case-studies/homecare-on-cable-set-top-boxes-in-texas" element={<CaseStudies />} />
 
           {/* Media Routing */}
+          <Route path="/media" element={<MediaPages />} />
           <Route path="/media/video" element={<MediaPages />} />
           <Route path="/media/in-news" element={<MediaPages />} />
           <Route path="/media/testimonial" element={<MediaPages />} />
