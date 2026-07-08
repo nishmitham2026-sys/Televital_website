@@ -169,6 +169,9 @@ export default function LiveVisitorAnalytics() {
   const browserRef = useRef(browser);
   browserRef.current = browser;
 
+  const routeLocationRef = useRef(routeLocation);
+  routeLocationRef.current = routeLocation;
+
   const hasSentTelemetry = useRef(false);
 
   // Send telemetry payload to Google Sheets script URL
@@ -313,16 +316,38 @@ export default function LiveVisitorAnalytics() {
     return () => clearInterval(timer);
   }, []);
 
-  // Send telemetry on page unload or component unmount
+  // Send telemetry on page unload, visibility change, or component unmount
   useEffect(() => {
     const handleUnload = () => {
       sendCurrentSessionTelemetry();
     };
 
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        sendCurrentSessionTelemetry();
+      } else if (document.visibilityState === 'visible') {
+        if (hasSentTelemetry.current) {
+          // If telemetry has already been sent for this session, reset and start a fresh session log
+          hasSentTelemetry.current = false;
+          setDuration(0);
+          setScrollHits(1);
+          
+          const initialSection = getPageFriendlyName(routeLocationRef.current.pathname);
+          setBrowsePath([initialSection]);
+          setActiveSection(initialSection);
+          setPathHistory([{ name: initialSection, duration: 0 }]);
+        }
+      }
+    };
+
     window.addEventListener('beforeunload', handleUnload);
+    window.addEventListener('pagehide', handleUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       window.removeEventListener('beforeunload', handleUnload);
+      window.removeEventListener('pagehide', handleUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       handleUnload();
     };
   }, []);
