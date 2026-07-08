@@ -234,6 +234,13 @@
   animation: scaleInBadge 0.2s ease-out;
 }
 
+.badge-step-duration {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: #004d44 !important;
+  opacity: 0.85;
+}
+
 /* Heatmap Row Layout */
 .heatmap-progress-bar {
   background-color: #f1f5f9;
