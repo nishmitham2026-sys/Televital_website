@@ -126,6 +126,16 @@ export default function LiveVisitorAnalytics() {
   const [deviceType] = useState(() => getDeviceType());
   const [browser] = useState(() => getBrowserName());
   
+  // Unique Session ID for the lifetime of this browser tab
+  const [sessionId, setSessionId] = useState(() => {
+    let sid = sessionStorage.getItem('televital_session_id');
+    if (!sid) {
+      sid = 'session_' + Math.random().toString(36).substring(2, 15) + '_' + Date.now();
+      sessionStorage.setItem('televital_session_id', sid);
+    }
+    return sid;
+  });
+  
   const [heatmap, setHeatmap] = useState({
     Home: 1,
     About: 0,
@@ -171,6 +181,9 @@ export default function LiveVisitorAnalytics() {
 
   const routeLocationRef = useRef(routeLocation);
   routeLocationRef.current = routeLocation;
+
+  const sessionIdRef = useRef(sessionId);
+  sessionIdRef.current = sessionId;
 
   const hasSentTelemetry = useRef(false);
 
@@ -228,7 +241,12 @@ export default function LiveVisitorAnalytics() {
       
       // Column H: Browser
       'Browser': telemetryData.browser,
-      'browser': telemetryData.browser
+      'browser': telemetryData.browser,
+      
+      // Column I: Session ID
+      'Session ID': telemetryData.sessionId,
+      'Session_ID': telemetryData.sessionId,
+      'sessionId': telemetryData.sessionId
     }).toString();
     
     const url = `${baseUrl}?${queryParams}`;
@@ -266,7 +284,10 @@ export default function LiveVisitorAnalytics() {
       'deviceType': telemetryData.deviceType,
       'devicetype': telemetryData.deviceType,
       'Browser': telemetryData.browser,
-      'browser': telemetryData.browser
+      'browser': telemetryData.browser,
+      'Session ID': telemetryData.sessionId,
+      'Session_ID': telemetryData.sessionId,
+      'sessionId': telemetryData.sessionId
     };
     
     fetch(url, {
@@ -293,7 +314,8 @@ export default function LiveVisitorAnalytics() {
         browsePath: formatBrowsePathWithDurations(pathHistoryRef.current),
         deviceType: deviceTypeRef.current,
         browser: browserRef.current,
-        durationText: durationFormatted
+        durationText: durationFormatted,
+        sessionId: sessionIdRef.current
       });
     }
   };
@@ -326,17 +348,7 @@ export default function LiveVisitorAnalytics() {
       if (document.visibilityState === 'hidden') {
         sendCurrentSessionTelemetry();
       } else if (document.visibilityState === 'visible') {
-        if (hasSentTelemetry.current) {
-          // If telemetry has already been sent for this session, reset and start a fresh session log
-          hasSentTelemetry.current = false;
-          setDuration(0);
-          setScrollHits(1);
-          
-          const initialSection = getPageFriendlyName(routeLocationRef.current.pathname);
-          setBrowsePath([initialSection]);
-          setActiveSection(initialSection);
-          setPathHistory([{ name: initialSection, duration: 0 }]);
-        }
+        hasSentTelemetry.current = false;
       }
     };
 
@@ -456,7 +468,8 @@ export default function LiveVisitorAnalytics() {
         browsePath: formatBrowsePathWithDurations(pathHistory),
         deviceType: deviceType,
         browser: browser,
-        durationText: formatDuration(durationRef.current)
+        durationText: formatDuration(durationRef.current),
+        sessionId: sessionId
       });
 
       hasSentTelemetry.current = true;
@@ -469,6 +482,11 @@ export default function LiveVisitorAnalytics() {
     }
 
     // 2. Setup next session
+    const nextSessionId = 'session_' + Math.random().toString(36).substring(2, 15) + '_' + Date.now();
+    sessionStorage.setItem('televital_session_id', nextSessionId);
+    setSessionId(nextSessionId);
+    hasSentTelemetry.current = false;
+
     setSelectedCountry(nextCountry);
     setSessionIP(generateRandomIP(nextCountry.ipPrefix));
     setDuration(0);
