@@ -117,6 +117,8 @@ export default function LiveVisitorAnalytics() {
 
   // Active Session State
   const [selectedCountry, setSelectedCountry] = useState(LOCATIONS[0]);
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
   const [sessionIP, setSessionIP] = useState(() => generateRandomIP(LOCATIONS[0].ipPrefix));
   const [duration, setDuration] = useState(0);
   const [activeSection, setActiveSection] = useState('Home');
@@ -152,38 +154,37 @@ export default function LiveVisitorAnalytics() {
 
   // Keep track of the current duration in a ref to archive correctly on location change
   const durationRef = useRef(duration);
-  durationRef.current = duration;
 
   // Additional refs for capturing the latest telemetry state in unload/unmount handlers
   const selectedCountryRef = useRef(selectedCountry);
-  selectedCountryRef.current = selectedCountry;
-
+  const selectedStateRef = useRef(selectedState);
+  const selectedCityRef = useRef(selectedCity);
   const sessionIPRef = useRef(sessionIP);
-  sessionIPRef.current = sessionIP;
-
   const scrollHitsRef = useRef(scrollHits);
-  scrollHitsRef.current = scrollHits;
-
   const activeSectionRef = useRef(activeSection);
-  activeSectionRef.current = activeSection;
-
   const browsePathRef = useRef(browsePath);
-  browsePathRef.current = browsePath;
-
   const pathHistoryRef = useRef(pathHistory);
-  pathHistoryRef.current = pathHistory;
-
   const deviceTypeRef = useRef(deviceType);
-  deviceTypeRef.current = deviceType;
-
   const browserRef = useRef(browser);
-  browserRef.current = browser;
-
   const routeLocationRef = useRef(routeLocation);
-  routeLocationRef.current = routeLocation;
-
   const sessionIdRef = useRef(sessionId);
-  sessionIdRef.current = sessionId;
+
+  // Update refs in an effect to avoid mutating refs during render
+  useEffect(() => {
+    durationRef.current = duration;
+    selectedCountryRef.current = selectedCountry;
+    selectedStateRef.current = selectedState;
+    selectedCityRef.current = selectedCity;
+    sessionIPRef.current = sessionIP;
+    scrollHitsRef.current = scrollHits;
+    activeSectionRef.current = activeSection;
+    browsePathRef.current = browsePath;
+    pathHistoryRef.current = pathHistory;
+    deviceTypeRef.current = deviceType;
+    browserRef.current = browser;
+    routeLocationRef.current = routeLocation;
+    sessionIdRef.current = sessionId;
+  });
 
   const hasSentTelemetry = useRef(false);
 
@@ -246,7 +247,17 @@ export default function LiveVisitorAnalytics() {
       // Column I: Session ID
       'Session ID': telemetryData.sessionId,
       'Session_ID': telemetryData.sessionId,
-      'sessionId': telemetryData.sessionId
+      'sessionId': telemetryData.sessionId,
+      
+      // State / Region
+      'State': telemetryData.selectedState || '',
+      'state': telemetryData.selectedState || '',
+      'Region': telemetryData.selectedState || '',
+      'region': telemetryData.selectedState || '',
+
+      // City Name
+      'City': telemetryData.selectedCity || '',
+      'city': telemetryData.selectedCity || ''
     }).toString();
     
     const url = `${baseUrl}?${queryParams}`;
@@ -287,7 +298,13 @@ export default function LiveVisitorAnalytics() {
       'browser': telemetryData.browser,
       'Session ID': telemetryData.sessionId,
       'Session_ID': telemetryData.sessionId,
-      'sessionId': telemetryData.sessionId
+      'sessionId': telemetryData.sessionId,
+      'State': telemetryData.selectedState || '',
+      'state': telemetryData.selectedState || '',
+      'Region': telemetryData.selectedState || '',
+      'region': telemetryData.selectedState || '',
+      'City': telemetryData.selectedCity || '',
+      'city': telemetryData.selectedCity || ''
     };
     
     fetch(url, {
@@ -315,7 +332,9 @@ export default function LiveVisitorAnalytics() {
         deviceType: deviceTypeRef.current,
         browser: browserRef.current,
         durationText: durationFormatted,
-        sessionId: sessionIdRef.current
+        sessionId: sessionIdRef.current,
+        selectedState: selectedStateRef.current,
+        selectedCity: selectedCityRef.current
       });
     }
   };
@@ -337,6 +356,175 @@ export default function LiveVisitorAnalytics() {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Geolocation Auto-Detection on page load
+  useEffect(() => {
+    const fetchPublicIP = async () => {
+      // Try ipify.org (JSON, supports CORS, extremely reliable)
+      try {
+        const res = await fetch('https://api64.ipify.org?format=json');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.ip) return data.ip;
+        }
+      } catch (e) {
+        console.warn('ipify failed, trying icanhazip:', e);
+      }
+
+      // Try icanhazip.com (Text, supports CORS, hosted by Cloudflare, very fast)
+      try {
+        const res = await fetch('https://icanhazip.com/');
+        if (res.ok) {
+          const text = await res.text();
+          if (text) return text.trim();
+        }
+      } catch (e) {
+        console.warn('icanhazip failed, trying ip.sb:', e);
+      }
+
+      // Try ip.sb (Text, supports CORS)
+      try {
+        const res = await fetch('https://api.ip.sb/ip');
+        if (res.ok) {
+          const text = await res.text();
+          if (text) return text.trim();
+        }
+      } catch (e) {
+        console.warn('ip.sb failed:', e);
+      }
+
+      throw new Error('All IP services failed');
+    };
+
+    const fetchGeoLocation = async () => {
+      try {
+        // 1. Fetch user's real public IP via CORS-compliant IP services
+        const ip = await fetchPublicIP();
+        
+        // Immediately record the real IP address to state
+        setSessionIP(ip);
+
+        // 2. Query our Apps Script web app (hosted on google.com, never blocked) to perform server-side geolocation
+        const baseUrl = 'https://script.google.com/macros/s/AKfycbzK0RT0NE5l0fDMnXGlVgPRr3Dpw_BrUHgPXQsopdk-LSuag7V0YerFFRMntKDm8NtW/exec';
+        const geoResponse = await fetch(`${baseUrl}?action=getGeo&ip=${ip}`);
+        if (geoResponse.ok) {
+          const geoData = await geoResponse.json();
+          if (geoData.countryCode && geoData.countryName) {
+            setSelectedCountry({
+              code: geoData.countryCode,
+              name: geoData.countryName
+            });
+            setSelectedState(geoData.regionName || '');
+            setSelectedCity(geoData.cityName || '');
+            return; // Geolocation successful!
+          }
+        }
+      } catch (err) {
+        console.warn('Google Sheets proxy lookup failed, attempting direct client-side fallback:', err);
+      }
+
+      // 3. Fallback direct client-side geolocation APIs if the Google proxy/trace fails
+      try {
+        // Try freeipapi.com first (supports HTTPS, high rate limits, no API key needed)
+        let response = await fetch('https://freeipapi.com/api/json');
+        let data;
+        if (response.ok) {
+          data = await response.json();
+          if (data.countryCode && data.countryName) {
+            setSelectedCountry({
+              code: data.countryCode,
+              name: data.countryName
+            });
+            if (data.ipAddress) setSessionIP(data.ipAddress);
+            setSelectedState(data.regionName || '');
+            setSelectedCity(data.cityName || '');
+            return;
+          }
+        }
+
+        // Try ipwho.is as the second option (supports HTTPS, free, CORS-friendly)
+        response = await fetch('https://ipwho.is/');
+        if (response.ok) {
+          data = await response.json();
+          if (data.success && data.country_code && data.country) {
+            setSelectedCountry({
+              code: data.country_code,
+              name: data.country
+            });
+            if (data.ip) setSessionIP(data.ip);
+            setSelectedState(data.region || '');
+            setSelectedCity(data.city || '');
+            return;
+          }
+        }
+
+        // Try ipapi.co as the third option (supports HTTPS, free tier limited to 1000 requests/day)
+        response = await fetch('https://ipapi.co/json/');
+        if (response.ok) {
+          data = await response.json();
+          if (data.country_code && data.country_name) {
+            setSelectedCountry({
+              code: data.country_code,
+              name: data.country_name
+            });
+            if (data.ip) setSessionIP(data.ip);
+            setSelectedState(data.region || '');
+            setSelectedCity(data.city || '');
+            return;
+          }
+        }
+
+        // Try ipinfo.io as the fourth option (supports HTTPS, free, very popular)
+        response = await fetch('https://ipinfo.io/json');
+        if (response.ok) {
+          data = await response.json();
+          if (data.country && data.ip) {
+            setSelectedCountry({
+              code: data.country,
+              name: data.country === 'IN' ? 'India' : data.country === 'US' ? 'United States' : data.country
+            });
+            if (data.ip) setSessionIP(data.ip);
+            setSelectedState(data.region || '');
+            setSelectedCity(data.city || '');
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Could not auto-detect visitor location, using default simulation:', err);
+      }
+    };
+
+    fetchGeoLocation();
+  }, []);
+
+  const handleSectionTransition = (sectionName) => {
+    setActiveSection(current => {
+      if (current === sectionName) return current;
+
+      // Update state if section changed
+      setScrollHits(prev => prev + 1);
+      setBrowsePath(prev => {
+        // Only add if it's different from the last element to prevent consecutive duplicates
+        if (prev[prev.length - 1] === sectionName) return prev;
+        return [...prev, sectionName];
+      });
+
+      setPathHistory(prev => {
+        if (prev.length > 0 && prev[prev.length - 1].name === sectionName) return prev;
+        return [...prev, { name: sectionName, duration: 0 }];
+      });
+
+      // Update heatmap (only if it is one of our 5 tracked sections)
+      if (HEATMAP_SECTIONS.includes(sectionName)) {
+        setHeatmap(prev => ({
+          ...prev,
+          [sectionName]: prev[sectionName] + 1
+        }));
+      }
+
+      return sectionName;
+    });
+  };
 
   // Send telemetry on page unload, visibility change, or component unmount
   useEffect(() => {
@@ -362,6 +550,7 @@ export default function LiveVisitorAnalytics() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       handleUnload();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Track Active Section & Page Views
@@ -370,7 +559,9 @@ export default function LiveVisitorAnalytics() {
 
     if (friendlyPageName !== 'Home') {
       // If we navigate away from Home page, set active section to the page friendly name
-      handleSectionTransition(friendlyPageName);
+      setTimeout(() => {
+        handleSectionTransition(friendlyPageName);
+      }, 0);
       return;
     }
 
@@ -409,39 +600,12 @@ export default function LiveVisitorAnalytics() {
     });
 
     // Fallback: If no sections are intersecting or found yet, default to Home
-    handleSectionTransition('Home');
+    setTimeout(() => {
+      handleSectionTransition('Home');
+    }, 0);
 
     return () => observer.disconnect();
   }, [routeLocation.pathname]);
-
-  const handleSectionTransition = (sectionName) => {
-    setActiveSection(current => {
-      if (current === sectionName) return current;
-
-      // Update state if section changed
-      setScrollHits(prev => prev + 1);
-      setBrowsePath(prev => {
-        // Only add if it's different from the last element to prevent consecutive duplicates
-        if (prev[prev.length - 1] === sectionName) return prev;
-        return [...prev, sectionName];
-      });
-
-      setPathHistory(prev => {
-        if (prev.length > 0 && prev[prev.length - 1].name === sectionName) return prev;
-        return [...prev, { name: sectionName, duration: 0 }];
-      });
-
-      // Update heatmap (only if it is one of our 5 tracked sections)
-      if (HEATMAP_SECTIONS.includes(sectionName)) {
-        setHeatmap(prev => ({
-          ...prev,
-          [sectionName]: prev[sectionName] + 1
-        }));
-      }
-
-      return sectionName;
-    });
-  };
 
   // Change simulated visitor location
   const handleCountryChange = (e) => {
@@ -456,6 +620,7 @@ export default function LiveVisitorAnalytics() {
         id: `log-${Date.now()}`,
         code: selectedCountry.code,
         name: selectedCountry.name,
+        state: selectedState,
         timestamp,
         durationText
       };
@@ -469,7 +634,9 @@ export default function LiveVisitorAnalytics() {
         deviceType: deviceType,
         browser: browser,
         durationText: formatDuration(durationRef.current),
-        sessionId: sessionId
+        sessionId: sessionId,
+        selectedState: selectedState,
+        selectedCity: selectedCity
       });
 
       hasSentTelemetry.current = true;
@@ -489,6 +656,8 @@ export default function LiveVisitorAnalytics() {
 
     setSelectedCountry(nextCountry);
     setSessionIP(generateRandomIP(nextCountry.ipPrefix));
+    setSelectedState('');
+    setSelectedCity('');
     setDuration(0);
     setScrollHits(1);
     
@@ -568,9 +737,14 @@ export default function LiveVisitorAnalytics() {
               <div className="col-6">
                 <div className="analytics-card">
                   <div className="card-flag-code font-heading">{selectedCountry.code}</div>
-                  <div className="card-value-primary text-teal font-heading">{selectedCountry.name}</div>
+                  <div 
+                    className="card-value-primary text-teal font-heading text-truncate w-100 px-1"
+                    title={`${selectedCountry.name}${selectedState ? `, ${selectedState}` : ''}${selectedCity ? `, ${selectedCity}` : ''}`}
+                  >
+                    {selectedCountry.name}{selectedState ? `, ${selectedState}` : ''}{selectedCity ? `, ${selectedCity}` : ''}
+                  </div>
                   <div className="card-label-secondary">
-                    COUNTRY (IP: {sessionIP})
+                    LOCATION (IP: {sessionIP})
                   </div>
                 </div>
               </div>
@@ -720,6 +894,34 @@ export default function LiveVisitorAnalytics() {
                   ))}
                 </select>
               </div>
+
+              <div className="mt-3">
+                <label htmlFor="stateSimInput" className="form-label small text-muted mb-2">
+                  Simulate Visitor State:
+                </label>
+                <input 
+                  type="text"
+                  id="stateSimInput" 
+                  className="form-control select-simulator rounded-3 font-sans"
+                  placeholder="Enter state (e.g. Karnataka)"
+                  value={selectedState} 
+                  onChange={(e) => setSelectedState(e.target.value)}
+                />
+              </div>
+
+              <div className="mt-3">
+                <label htmlFor="citySimInput" className="form-label small text-muted mb-2">
+                  Simulate Visitor City:
+                </label>
+                <input 
+                  type="text"
+                  id="citySimInput" 
+                  className="form-control select-simulator rounded-3 font-sans"
+                  placeholder="Enter city (e.g. Bengaluru)"
+                  value={selectedCity} 
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                />
+              </div>
             </div>
           </div>
 
@@ -749,7 +951,9 @@ export default function LiveVisitorAnalytics() {
                     <div>
                       <div className="d-flex align-items-center">
                         <span className="badge bg-light text-dark border me-2 small fw-bold">{log.code}</span>
-                        <strong className="text-dark small">{log.name}</strong>
+                        <strong className="text-dark small">
+                          {log.name}{log.state ? `, ${log.state}` : ''}
+                        </strong>
                       </div>
                       <div className="text-muted small mt-1" style={{ fontSize: '0.75rem' }}>{log.timestamp}</div>
                     </div>
