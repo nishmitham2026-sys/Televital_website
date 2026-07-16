@@ -382,7 +382,29 @@ export default function LiveVisitorAnalytics() {
     }
 
     const fetchPublicIP = async () => {
-      // Try ipify.org (JSON, supports CORS, extremely reliable)
+      // 1. Try IPv6-only JSON endpoint (ipify)
+      try {
+        const res = await fetch('https://api6.ipify.org?format=json');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.ip) return data.ip;
+        }
+      } catch {
+        // Continue to text-based IPv6 lookup
+      }
+
+      // 2. Try IPv6-only text endpoint (icanhazip)
+      try {
+        const res = await fetch('https://ipv6.icanhazip.com/');
+        if (res.ok) {
+          const text = await res.text();
+          if (text) return text.trim();
+        }
+      } catch {
+        // Fall back to Dual-Stack / IPv4 endpoints
+      }
+
+      // 3. Fallback: Try ipify.org (JSON, dual-stack, extremely reliable)
       try {
         const res = await fetch('https://api64.ipify.org?format=json');
         if (res.ok) {
@@ -390,10 +412,10 @@ export default function LiveVisitorAnalytics() {
           if (data.ip) return data.ip;
         }
       } catch (e) {
-        console.warn('ipify failed, trying icanhazip:', e);
+        console.warn('api64 failed, trying icanhazip:', e);
       }
 
-      // Try icanhazip.com (Text, supports CORS, hosted by Cloudflare, very fast)
+      // 4. Fallback: Try icanhazip.com (Text, dual-stack)
       try {
         const res = await fetch('https://icanhazip.com/');
         if (res.ok) {
@@ -404,7 +426,7 @@ export default function LiveVisitorAnalytics() {
         console.warn('icanhazip failed, trying ip.sb:', e);
       }
 
-      // Try ip.sb (Text, supports CORS)
+      // 5. Fallback: Try ip.sb (Text, dual-stack)
       try {
         const res = await fetch('https://api.ip.sb/ip');
         if (res.ok) {
@@ -419,68 +441,74 @@ export default function LiveVisitorAnalytics() {
     };
 
     const fetchGeoLocation = async () => {
-      // 1. Try DB-IP first (Direct client-side all-in-one lookup, extremely fast: ~150ms)
       try {
-        const response = await fetch('https://api.db-ip.com/v2/free/self');
-        if (response.ok) {
-          const data = await response.json();
-          if (data.countryCode && data.countryName) {
-            setSelectedCountry({
-              code: data.countryCode,
-              name: data.countryName
-            });
-            const clientIP = data.ipAddress || '';
-            setSessionIP(clientIP);
-            setSelectedState(data.stateProv || '');
-            setSelectedCity(data.city || '');
-            
-            // Save to cache
-            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
-              countryCode: data.countryCode,
-              countryName: data.countryName,
-              state: data.stateProv || '',
-              city: data.city || '',
-              ip: clientIP
-            }));
-            return; // Successful direct lookup!
-          }
-        }
-      } catch (err) {
-        console.warn('Direct DB-IP lookup failed (likely blocked by adblocker), falling back to proxy:', err);
-      }
-
-      // 2. Fallback to server-side Google Apps Script proxy if direct DB-IP is blocked
-      try {
+        // 1. Fetch user's real public IP (prefers IPv6-only endpoints for accurate local routing, falls back to IPv4)
         const ip = await fetchPublicIP();
+        
+        // Immediately record the resolved IP address to state
         setSessionIP(ip);
 
-        const baseUrl = 'https://script.google.com/macros/s/AKfycbzK0RT0NE5l0fDMnXGlVgPRr3Dpw_BrUHgPXQsopdk-LSuag7V0YerFFRMntKDm8NtW/exec';
-        const geoResponse = await fetch(`${baseUrl}?action=getGeo&ip=${ip}`);
-        if (geoResponse.ok) {
-          const geoData = await geoResponse.json();
-          if (geoData.countryCode && geoData.countryName) {
-            setSelectedCountry({
-              code: geoData.countryCode,
-              name: geoData.countryName
-            });
-            setSelectedState(geoData.regionName || '');
-            setSelectedCity(geoData.cityName || '');
-
-            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
-              countryCode: geoData.countryCode,
-              countryName: geoData.countryName,
-              state: geoData.regionName || '',
-              city: geoData.cityName || '',
-              ip: ip
-            }));
-            return;
+        // 2. Try DB-IP first using the resolved IP address (Direct client-side lookup, extremely fast: ~150ms)
+        try {
+          const response = await fetch(`https://api.db-ip.com/v2/free/${ip}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data.countryCode && data.countryName) {
+              setSelectedCountry({
+                code: data.countryCode,
+                name: data.countryName
+              });
+              setSelectedState(data.stateProv || '');
+              setSelectedCity(data.city || '');
+              
+              // Save to cache
+              sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+                countryCode: data.countryCode,
+                countryName: data.countryName,
+                state: data.stateProv || '',
+                city: data.city || '',
+                ip: ip
+              }));
+              return; // Successful direct lookup!
+            }
           }
+        } catch (err) {
+          console.warn('Direct IP-specific DB-IP lookup failed (blocked by adblocker), trying proxy:', err);
         }
+
+        // 3. Fallback to server-side Google Apps Script proxy if direct DB-IP is blocked
+        try {
+          const baseUrl = 'https://script.google.com/macros/s/AKfycbzK0RT0NE5l0fDMnXGlVgPRr3Dpw_BrUHgPXQsopdk-LSuag7V0YerFFRMntKDm8NtW/exec';
+          const geoResponse = await fetch(`${baseUrl}?action=getGeo&ip=${ip}`);
+          if (geoResponse.ok) {
+            const geoData = await geoResponse.json();
+            if (geoData.countryCode && geoData.countryName) {
+              setSelectedCountry({
+                code: geoData.countryCode,
+                name: geoData.countryName
+              });
+              setSelectedState(geoData.regionName || '');
+              setSelectedCity(geoData.cityName || '');
+
+              sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+                countryCode: geoData.countryCode,
+                countryName: geoData.countryName,
+                state: geoData.regionName || '',
+                city: geoData.cityName || '',
+                ip: ip
+              }));
+              return;
+            }
+          }
+        } catch (err) {
+          console.warn('Google Sheets proxy lookup failed, trying other direct fallbacks:', err);
+        }
+
       } catch (err) {
-        console.warn('Google Sheets proxy lookup failed, trying other direct fallbacks:', err);
+        console.warn('Initial IP fetch failed, attempting client-side fallback from self-endpoints:', err);
       }
 
-      // 3. Fallback direct client-side geolocation APIs if proxy fails
+      // 4. Fallback direct client-side geolocation APIs if the IP fetch or proxy failed
       try {
         // Try freeipapi.com (supports HTTPS, high rate limits, no API key needed)
         let response = await fetch('https://freeipapi.com/api/json');
