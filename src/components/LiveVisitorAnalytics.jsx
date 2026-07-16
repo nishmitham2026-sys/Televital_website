@@ -359,6 +359,26 @@ export default function LiveVisitorAnalytics() {
 
   // Geolocation Auto-Detection on page load
   useEffect(() => {
+    // 1. Try to load location from sessionStorage cache first (0ms load, bypasses rate limits)
+    const cachedGeo = sessionStorage.getItem('televital_cached_geo');
+    if (cachedGeo) {
+      try {
+        const data = JSON.parse(cachedGeo);
+        if (data.countryCode && data.countryName) {
+          setSelectedCountry({
+            code: data.countryCode,
+            name: data.countryName
+          });
+          setSessionIP(data.ip || '');
+          setSelectedState(data.state || '');
+          setSelectedCity(data.city || '');
+          return;
+        }
+      } catch (e) {
+        console.warn('Failed to parse cached geo:', e);
+      }
+    }
+
     const fetchPublicIP = async () => {
       // Try ipify.org (JSON, supports CORS, extremely reliable)
       try {
@@ -398,13 +418,13 @@ export default function LiveVisitorAnalytics() {
 
     const fetchGeoLocation = async () => {
       try {
-        // 1. Fetch user's real public IP via CORS-compliant IP services
+        // 2. Fetch user's real public IP via CORS-compliant IP services
         const ip = await fetchPublicIP();
         
         // Immediately record the real IP address to state
         setSessionIP(ip);
 
-        // 2. Query our Apps Script web app (hosted on google.com, never blocked) to perform server-side geolocation
+        // 3. Query our Apps Script web app (hosted on google.com, never blocked) to perform server-side geolocation
         const baseUrl = 'https://script.google.com/macros/s/AKfycbzK0RT0NE5l0fDMnXGlVgPRr3Dpw_BrUHgPXQsopdk-LSuag7V0YerFFRMntKDm8NtW/exec';
         const geoResponse = await fetch(`${baseUrl}?action=getGeo&ip=${ip}`);
         if (geoResponse.ok) {
@@ -416,6 +436,15 @@ export default function LiveVisitorAnalytics() {
             });
             setSelectedState(geoData.regionName || '');
             setSelectedCity(geoData.cityName || '');
+
+            // Save to cache to prevent rate-limiting on page reloads
+            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+              countryCode: geoData.countryCode,
+              countryName: geoData.countryName,
+              state: geoData.regionName || '',
+              city: geoData.cityName || '',
+              ip: ip
+            }));
             return; // Geolocation successful!
           }
         }
@@ -423,11 +452,35 @@ export default function LiveVisitorAnalytics() {
         console.warn('Google Sheets proxy lookup failed, attempting direct client-side fallback:', err);
       }
 
-      // 3. Fallback direct client-side geolocation APIs if the Google proxy/trace fails
+      // 4. Fallback direct client-side geolocation APIs if the Google proxy/trace fails
       try {
-        // Try freeipapi.com first (supports HTTPS, high rate limits, no API key needed)
-        let response = await fetch('https://freeipapi.com/api/json');
+        // Try db-ip.com first (supports HTTPS, free, CORS-friendly, very reliable)
+        let response = await fetch('https://api.db-ip.com/v2/free/self');
         let data;
+        if (response.ok) {
+          data = await response.json();
+          if (data.countryCode && data.countryName) {
+            setSelectedCountry({
+              code: data.countryCode,
+              name: data.countryName
+            });
+            if (data.ipAddress) setSessionIP(data.ipAddress);
+            setSelectedState(data.stateProv || '');
+            setSelectedCity(data.city || '');
+            
+            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+              countryCode: data.countryCode,
+              countryName: data.countryName,
+              state: data.stateProv || '',
+              city: data.city || '',
+              ip: data.ipAddress || ''
+            }));
+            return;
+          }
+        }
+
+        // Try freeipapi.com as second option (supports HTTPS, high rate limits, no API key needed)
+        response = await fetch('https://freeipapi.com/api/json');
         if (response.ok) {
           data = await response.json();
           if (data.countryCode && data.countryName) {
@@ -438,11 +491,19 @@ export default function LiveVisitorAnalytics() {
             if (data.ipAddress) setSessionIP(data.ipAddress);
             setSelectedState(data.regionName || '');
             setSelectedCity(data.cityName || '');
+            
+            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+              countryCode: data.countryCode,
+              countryName: data.countryName,
+              state: data.regionName || '',
+              city: data.cityName || '',
+              ip: data.ipAddress || ''
+            }));
             return;
           }
         }
 
-        // Try ipwho.is as the second option (supports HTTPS, free, CORS-friendly)
+        // Try ipwho.is as third option (supports HTTPS, free, CORS-friendly)
         response = await fetch('https://ipwho.is/');
         if (response.ok) {
           data = await response.json();
@@ -454,11 +515,19 @@ export default function LiveVisitorAnalytics() {
             if (data.ip) setSessionIP(data.ip);
             setSelectedState(data.region || '');
             setSelectedCity(data.city || '');
+            
+            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+              countryCode: data.country_code,
+              countryName: data.country,
+              state: data.region || '',
+              city: data.city || '',
+              ip: data.ip || ''
+            }));
             return;
           }
         }
 
-        // Try ipapi.co as the third option (supports HTTPS, free tier limited to 1000 requests/day)
+        // Try ipapi.co as fourth option (supports HTTPS, free tier limited to 1000 requests/day)
         response = await fetch('https://ipapi.co/json/');
         if (response.ok) {
           data = await response.json();
@@ -470,22 +539,39 @@ export default function LiveVisitorAnalytics() {
             if (data.ip) setSessionIP(data.ip);
             setSelectedState(data.region || '');
             setSelectedCity(data.city || '');
+            
+            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+              countryCode: data.country_code,
+              countryName: data.country_name,
+              state: data.region || '',
+              city: data.city || '',
+              ip: data.ip || ''
+            }));
             return;
           }
         }
 
-        // Try ipinfo.io as the fourth option (supports HTTPS, free, very popular)
+        // Try ipinfo.io as fifth option (supports HTTPS, free, very popular)
         response = await fetch('https://ipinfo.io/json');
         if (response.ok) {
           data = await response.json();
           if (data.country && data.ip) {
+            const countryName = data.country === 'IN' ? 'India' : data.country === 'US' ? 'United States' : data.country;
             setSelectedCountry({
               code: data.country,
-              name: data.country === 'IN' ? 'India' : data.country === 'US' ? 'United States' : data.country
+              name: countryName
             });
             if (data.ip) setSessionIP(data.ip);
             setSelectedState(data.region || '');
             setSelectedCity(data.city || '');
+            
+            sessionStorage.setItem('televital_cached_geo', JSON.stringify({
+              countryCode: data.country,
+              countryName: countryName,
+              state: data.region || '',
+              city: data.city || '',
+              ip: data.ip || ''
+            }));
             return;
           }
         }
